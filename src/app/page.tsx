@@ -3,7 +3,6 @@ import Link from "next/link";
 import React from "react";
 import Button from "../../components/Button";
 import Form from "../../components/Form";
-
 export default function Component() {
   return (
     <div id="website">
@@ -69,43 +68,27 @@ export default function Component() {
           <p>Powered by Google Lighthouse</p>
         </footer>
       </div>
-
-      {/* <div id="website-next" className="md:mt-15 mx-80">
-        <div className="flex justify-between gap-8 p-4">
-          <div className="w-1/2"> 
-            <h2 className="text-3xl text-[rgb(46,71,93)] font-medium">Get Your Website Rating in Seconds</h2>
-            <p className="text-sm text-[rgb(46,71,93)] pt-2 mt-10">HubSpot's free website grader makes understanding website performance easy. The hardest part of building a site is often the guesswork. Which changes are important, and which aren’t? It can sometimes feel impossible to tell. Our online grader demystifies the whole process. Learn about your page performance, security, search engine optimization (SEO), and mobile experience. Discover what makes your site strong and uncover new opportunities for the future.</p>
-          </div>
-
-          <div className="w-1/2">
-            <Image className="h-auto w-full items-center"
-              src="/images/website-performance-rating.png"
-              alt="HubSpot Logo"
-              width={200}
-              height={200}
-            />
-          </div>
-        </div>Name
-      </div> */}
-      <div className="bg-white font-sans ">
-        {/* Main Flex Container */}
-        <div className="flex flex-col-reverse md:flex-row gap-8 mb-16 md:mt-10 md:mx-40 lg:mt-15 lg:mx-80 sm:mt-6 sm:mx-4">
+      <div className="bg-white font-sans relative min-h-screen">
+      {/* Main Container */}
+      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Flex Section */}
+        <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-8 mb-16 md:mt-10">
           {/* Text Section */}
-          <div className="w-full md:w-1/2">
-            <h2 className="text-3xl font-bold text-slate-700 mb-4 text-center md:text-left">
+          <div className="w-full md:w-[48%] text-center md:text-left">
+            <h2 className="text-3xl font-bold text-slate-700 mb-4">
               Get Your Website Rating in Seconds
             </h2>
-            <p className="text-sm mb-3 text-slate-600 text-center md:text-left">
-              HubSpot&#x27;s free website grader makes understanding website
+            <p className="text-sm text-slate-600 leading-relaxed">
+              HubSpot's free website grader makes understanding website
               performance easy. The hardest part of building a site is often the
-              guesswork. Which changes are important, and which aren&#x27;t? It
-              can sometimes feel impossible to tell. Our{" "}
+              guesswork. Which changes are important, and which aren't? It can
+              sometimes feel impossible to tell. Our{" "}
               <span className="text-teal-600 hover:text-teal-700 transition-colors">
                 online grader
               </span>{" "}
               demystifies the whole process.
             </p>
-            <p className="text-sm text-slate-600 text-center md:text-left">
+            <p className="text-sm text-slate-600 mt-3">
               Learn about your page performance, security, search engine
               optimization (SEO), and mobile experience. Discover what makes
               your site strong and uncover new opportunities for the future.
@@ -113,29 +96,31 @@ export default function Component() {
           </div>
 
           {/* Image Section */}
-          <div className="w-full md:w-1/2 items-center">
+          <div className="w-full md:w-[48%] flex justify-center">
             <Image
-              className="h-auto w-full rounded-lg"
+              className="rounded-lg"
               src="/images/website-performance-rating.png"
-              alt="Demo Performance Image"
+              alt="Website Performance Rating"
               width={400}
-              height={300}
+              height={400}
+              priority
             />
           </div>
         </div>
 
         {/* More Information Section */}
-        <div className="bg-slate-100">
-        <div className="mb-6 md:flex-row gap-8 md:mt-10 md:mx-40 lg:mt-15 lg:mx-80 sm:mt-6 sm:mx-4">
+        
+      </div>
+      <div className="bg-slate-100 py-12">
           <h3 className="text-xl font-semibold text-center text-slate-700 mb-6">
             More Information
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-slate-100">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 px-4 md:px-0">
             {[
               {
                 title: "What is a website checker?",
                 content:
-                "A website checker is a mini site audit, giving you insight into how your website performs. A good website analyzer should audit your site across a range of criteria so you can get an idea of your overall performance, security, mobile experience, and search engine optimization (SEO). If you’re looking for next steps, readHubSpot’s Academy Course on Web Optimizationto learn about the factors that are both improving and reducing your site rating",
+                  "A website checker is a mini site audit, giving you insight into how your website performs. A good website analyzer should audit your site across a range of criteria so you can get an idea of your overall performance, security, mobile experience, and search engine optimization (SEO). If you’re looking for next steps, read",
               },
               {
                 title: "How to optimize a website for SEO?",
@@ -155,23 +140,22 @@ export default function Component() {
             ].map((item, index) => (
               <details
                 key={index}
-                className="group border border-gray-400 rounded-md overflow-hidden hover:shadow-md transition-shadow duration-300"
+                className="group border border-gray-300 rounded-md overflow-hidden bg-slate-100 hover:shadow-md transition-shadow duration-300"
               >
-                <summary className="flex items-center p-4 cursor-pointer bg-slate-100 text-slate-700 font-medium">
-                  <span className="text-teal-600 mr-2 transform group-open:rotate-90 transition-transform duration-300">
+                <summary className="flex bg-slate-100 items-center justify-between p-4 cursor-pointer font-medium text-slate-700">
+                  <span>{item.title}</span>
+                  <span className="text-teal-600 transition-transform duration-300 group-open:rotate-90">
                     <i className="fa-solid fa-chevron-right"></i>
                   </span>
-                  {item.title}
                 </summary>
-                <div className="p-4 bg-slate-100 text-slate-600 text-sm">
+                <div className="p-4 text-slate-600 text-sm bg-slate-100">
                   {item.content}
                 </div>
               </details>
             ))}
           </div>
         </div>
-        </div>
-      </div>
+    </div>
     </div>
   );
 }
