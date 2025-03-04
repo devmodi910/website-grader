@@ -2,17 +2,23 @@
 
 import { fetchWebsiteDetails } from "@/app/actions/fetchWebsiteDetails";
 import Link from "next/link";
-import { FormEvent } from "react";
-// import { submit } from "@/app/actions/fetchWebsiteDetails";
 
 export default function Form() {
+  async function submit(formData: FormData) {
 
-    async function submit(formData: FormData) {
-        console.log("clciked");
-        const response = await fetchWebsiteDetails(formData);
-        console.log(response)
+    // ✅ Extract the URL value from FormData
+    const url = formData.get("url") as string;
+    console.log(url)
+    if (!url) {
+      console.error("URL is required");
+      return;
     }
- 
+
+    const response = await fetchWebsiteDetails(url); // ✅ Send URL as a string
+    console.log(response);
+    
+  }
+
   return (
     <div className="max-w-md mx-auto w-full">
       <form action={submit}>
@@ -39,14 +45,12 @@ export default function Form() {
             Privacy Policy.
           </Link>
         </p>
-      
 
-      <button 
-        className="bg-orange-500 text-white px-5 py-2 rounded-sm font-normal w-40 transition-all duration-300 transform "
-      >
-        Get your score
-      </button>
-      
+        <button
+          className="bg-orange-500 text-white px-5 py-2 rounded-sm font-normal w-40 transition-all duration-300 transform"
+        >
+          Get your score
+        </button>
       </form>
     </div>
   );
