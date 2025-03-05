@@ -46,9 +46,8 @@ export async function fetchWebsiteDetails(url: string) {
 }
 
 // Example scoring function (you can modify it)
-function calculatePageSizeScore(pageSizeKB: number) {
-  if (pageSizeKB < 500) return 100;
-  if (pageSizeKB < 1000) return 80;
-  if (pageSizeKB < 2000) return 60;
-  return 40;
+function calculatePageSizeScore(kbSize: number) {
+  if (kbSize <= 500) return 100;
+  if (kbSize >= 6000) return 0;
+  return Math.max(0, Math.round(100 - ((kbSize - 500) / (6000 - 500)) * 100));
 }
