@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "chrome-launcher": "^1.1.2",
+    "framer-motion": "^12.4.10",
     "lighthouse": "^12.4.0",
     "next": "15.2.0",
     "next-intl": "^3.26.5",

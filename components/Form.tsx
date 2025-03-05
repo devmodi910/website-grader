@@ -1,31 +1,41 @@
-//components/Form.tsx
 "use client";
 
-import { fetchWebsiteDetails } from "@/app/actions/fetchWebsiteDetails";
+import { Suspense, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useLighthouse } from "../context/LightHouseContext";
 import Link from "next/link";
 
 export default function Form() {
-  async function submit(formData: FormData) {
+  const [loading, setLoading] = useState(false);
+  const router = useRouter(); // ✅ Initialize Next.js router
+  const {setData} = useLighthouse();
 
-    // ✅ Extract the URL value from FormData
+  async function submit(formData: FormData) {
     const url = formData.get("url") as string;
-    console.log(url)
+    
     if (!url) {
       console.error("URL is required");
       return;
     }
 
+    setLoading(true); // ✅ Start loading state
+    
     try {
       const response = await fetch(`/api/lighthouse?url=${encodeURIComponent(url)}`, {
         method: "GET",
       });
+      
 
       const data = await response.json();
-      console.log(data);
+      console.log(data.pageSizeScore);
+      // ✅ Redirect to results page with URL as query param
+      setData({url,pageSizeScore:data.pageSizeScore});
+      router.push(`/results`);
     } catch (error) {
       console.error("Error fetching Lighthouse results:", error);
+    } finally {
+      setLoading(false); // ✅ Stop loading state
     }
-    
   }
 
   return (
@@ -57,8 +67,9 @@ export default function Form() {
 
         <button
           className="bg-orange-500 text-white px-5 py-2 rounded-sm font-normal w-40 transition-all duration-300 transform"
+          disabled={loading} // ✅ Disable button when loading
         >
-          Get your score
+          {loading ? "Checking..." : "Get your score"}
         </button>
       </form>
     </div>
