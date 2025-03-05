@@ -1,3 +1,4 @@
+//components/Form.tsx
 "use client";
 
 import { fetchWebsiteDetails } from "@/app/actions/fetchWebsiteDetails";
@@ -14,8 +15,16 @@ export default function Form() {
       return;
     }
 
-    const response = await fetchWebsiteDetails(url); // ✅ Send URL as a string
-    console.log(response);
+    try {
+      const response = await fetch(`/api/lighthouse?url=${encodeURIComponent(url)}`, {
+        method: "GET",
+      });
+
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error("Error fetching Lighthouse results:", error);
+    }
     
   }
 
