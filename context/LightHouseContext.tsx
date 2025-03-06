@@ -5,6 +5,7 @@ import { createContext, useContext, useState, ReactNode } from "react";
 type LighthouseData = {
   url: string;
   pageSizeScore: number;
+  screenshotBase64: string;
 } | null;
 
 type LighthouseContextType = {

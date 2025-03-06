@@ -19,7 +19,7 @@ const CircleProgress: React.FC<CircleProgressProps> = ({ score }) => {
   const strokeDashoffset: number = circumference - (progress / 100) * circumference;
 
   return (
-    <div className="relative w-32 h-32 flex items-center justify-center">
+    <div className="relative w-45 h-45 flex items-center justify-center">
       <svg
         className="w-full h-full rotate-[-90deg]"
         viewBox="0 0 120 120"
@@ -45,7 +45,7 @@ const CircleProgress: React.FC<CircleProgressProps> = ({ score }) => {
           transition={{ duration: 1.5, ease: "easeInOut" }}
         />
       </svg>
-      <span className="absolute text-2xl font-bold text-white">{progress}</span>
+      <span className="absolute text-4xl font-bold text-white">{progress}</span>
     </div>
   );
 };

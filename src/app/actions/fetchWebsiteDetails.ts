@@ -10,7 +10,8 @@ export async function fetchWebsiteDetails(url: string) {
   let chrome;
 
   try {
-    chrome = await launch({ chromeFlags: ["--headless"] });
+    chrome = await launch({ chromeFlags: ["--headless"] },);
+    
 
     const options = {
       logLevel: "silent" as const,
@@ -27,10 +28,13 @@ export async function fetchWebsiteDetails(url: string) {
     }
 
     const totalByteWeight = result.lhr.audits["total-byte-weight"]?.numericValue ?? 0;
+    const screenshotDetails = result.lhr.audits["final-screenshot"]?.details;
+    const screenshotBase64 =
+      (screenshotDetails as { data?: string })?.data ?? null;
     const pageSizeKB = totalByteWeight / 1024;
     const pageSizeScore = calculatePageSizeScore(pageSizeKB);
 
-    return { url, totalPageSize: `${pageSizeKB.toFixed(2)} KB`, pageSizeScore };
+    return { url, totalPageSize: `${pageSizeKB.toFixed(2)} KB`, pageSizeScore,screenshotBase64 };
   } catch (error) {
     throw new Error(error instanceof Error ? error.message : "An unknown error occurred");
   } finally {

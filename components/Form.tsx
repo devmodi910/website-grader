@@ -29,7 +29,7 @@ export default function Form() {
       const data = await response.json();
       console.log(data.pageSizeScore);
       // ✅ Redirect to results page with URL as query param
-      setData({url,pageSizeScore:data.pageSizeScore});
+      setData({url,pageSizeScore:data.pageSizeScore,screenshotBase64:data.screenshotBase64});
       router.push(`/results`);
     } catch (error) {
       console.error("Error fetching Lighthouse results:", error);
@@ -66,7 +66,7 @@ export default function Form() {
         </p>
 
         <button
-          className="bg-orange-500 text-white px-5 py-2 rounded-sm font-normal w-40 transition-all duration-300 transform"
+          className="bg-orange-500 text-white px-5 py-2 rounded-sm font-normal w-40 transition-all duration-300 transform cursor-pointer"
           disabled={loading} // ✅ Disable button when loading
         >
           {loading ? "Checking..." : "Get your score"}
