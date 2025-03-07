@@ -155,7 +155,7 @@ export default function ResultsPage() {
           </div>
         </div>
         <div className="bg-[#f5f8fa] flex flex-col justify-center text-center font-black">
-          <div className="h-full align-middle mb-15">
+          <div className="h-full align-middle">
             <div className="mb-15">
               <div className="flex justify-center mt-15 mb-3 text-center">
                 <div className="flex justify-center items-center w-38 object-contain ">
@@ -372,6 +372,455 @@ export default function ResultsPage() {
             </div>
           </div>
         </div>
+        <div className="bg-[#f5f8fa] flex flex-col justify-center text-center font-black">
+          <div className="h-full align-middle">
+            <div className="mb-15">
+              <div className="flex justify-center mt-15 mb-3 text-center">
+                <div className="flex justify-center items-center w-38 object-contain ">
+                  <Image
+                    src={"/images/global.svg"}
+                    width={200}
+                    height={200}
+                    alt="xyz"
+                  />
+                </div>
+              </div>
+              <div className="mt-6">
+                <div className="text-5xl font-bold">
+                  <span className="text-[#00bda5]">30</span>
+                  <span className="text-[#33475b] text-3xl">/30</span>
+                </div>
+                <div className="mb-[10px] inline-block relative w-60">
+                  <div className="bg-[#dbdbdb] h-[10px] rounded-full overflow-hidden">
+                    <div className="w-full bg-[#00bda5] h-full"></div>
+                  </div>
+                </div>
+              </div>
+              <h3 className="text-[#333] text-[32px] font-bold">SEO</h3>
+              <div className="text-[#33475b] text-[16px] font-normal text-center leading-6 relative m-auto w-4/5 max-w-[690px] space-x-0">
+                Optimizing your website content for search helps you drive
+                organic traffic to your website. You can do this by providing a
+                great experience for people and web crawlers alike.
+              </div>
+              <div className="flex justify-center">
+                <div className="border border-[#dfe3eb] rounded-[40px] bg-white my-[10px] px-5 py-[12px] flex items-center justify-center w-[460px]">
+                  {/* Trophy Icon */}
+                  <div className="bg-[url('/images/search.png')] bg-center bg-no-repeat bg-[length:24px_21px] w-6 h-6 mr-3"></div>
+
+                  {/* Text */}
+                  <div className="text-[#516f90] text-xs leading-3 font-light flex">
+                    Improve your website performance with&nbsp;
+                    <span className="text-[#0073aa] font-bold">
+                      free 15-minute lesson
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-col md:flex-row justify-around font-serif">
+                {/* Box 1 */}
+                <div className="flex-1 bg-white border-r border-[#dbdbdb] last:border-r-0 p-4 m-[30px] pt-9 px-[30px] pb-[30px] shadow-md">
+                  <div className="text-[10px] font-medium relative leading-[14px] text-white">
+                    <div className="bg-[#00bda5] absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
+                      Pass
+                    </div>
+                  </div>
+                  <div className="text-[14px] leading-[19px] text-[#4a4a4a] mb-5 uppercase break-words">
+                    Permission To Index
+                  </div>
+                  <div className="relative h-15 w-13 mx-auto my-5">
+                    <Image src={"/images/pass.png"} fill alt="xyz"></Image>
+                  </div>
+                  <div>
+                    <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px]">
+                      Granted.
+                    </div>
+                    <div className="text-[#516f90] text-[14px] leading-[20px] my-[10px]">
+                      In order for a page to appear in search results, search
+                      engines must have permission to store it in their index.
+                      If they can't store it, no other changes matter.
+                    </div>
+                  </div>
+                </div>
+
+                {/* Box 2 */}
+                <div className="flex-1 bg-white border-r border-[#dbdbdb] last:border-r-0 p-4 m-[30px] pt-9 px-[30px] pb-[30px] shadow-md">
+                  <div className="text-[10px] font-medium relative leading-[14px] text-white">
+                    <div className="bg-[#00bda5] absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
+                      Pass
+                    </div>
+                  </div>
+                  <div className="text-[14px] leading-[19px] text-[#4a4a4a] mb-5 uppercase break-words">
+                    Meta Description
+                  </div>
+                  <div className="relative h-15 w-13 mx-auto my-5">
+                    <Image src={"/images/pass.png"} fill alt="xyz"></Image>
+                  </div>
+                  <div>
+                    <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px]">
+                      Look at you go!
+                    </div>
+                    <div className="text-[#516f90] text-[14px] leading-[20px] my-[10px]">
+                      Meta descriptions tell people what your page is about in
+                      search results.
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex-1 bg-white border-r border-[#dbdbdb] last:border-r-0 p-4 m-[30px] pt-9 px-[30px] pb-[30px] shadow-md">
+                  <div className="text-[10px] font-medium relative leading-[14px] text-white">
+                    <div className="bg-[#00bda5] absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
+                      Pass
+                    </div>
+                  </div>
+                  <div className="text-[14px] leading-[19px] text-[#4a4a4a] mb-5 uppercase break-words">
+                    Content Plugins
+                  </div>
+                  <div className="relative h-15 w-13 mx-auto my-5">
+                    <Image src={"/images/pass.png"} fill alt="xyz"></Image>
+                  </div>
+                  <div>
+                    <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px]">
+                      *Clap, clap, clap* Good job!
+                    </div>
+                    <div className="text-[#516f90] text-[14px] leading-[20px] my-[10px]">
+                      Search engines can't always understand content that relies
+                      on browser plugins, such as Flash.
+                    </div>
+                  </div>
+                </div>
+
+                {/* Box 3 (Now Equal in Size) */}
+                <div className="flex-1 bg-white border-r border-[#dbdbdb] last:border-r-0 p-4 m-[30px] pt-9 px-[30px] pb-[30px] shadow-md">
+                  <div className="text-[10px] font-medium relative leading-[14px] text-white">
+                    <div className="bg-[#00bda5] absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
+                      Pass
+                    </div>
+                  </div>
+                  <div className="text-[14px] leading-[19px] text-[#4a4a4a] mb-5 uppercase break-words">
+                    Descriptive Link Text
+                  </div>
+                  <div className="relative h-15 w-13 mx-auto my-5">
+                    <Image src={"/images/pass.png"} fill alt="xyz"></Image>
+                  </div>
+                  <div>
+                    <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px]">
+                      Your links make sense.
+                    </div>
+                    <div className="text-[#516f90] text-[14px] leading-[20px] my-[10px]">
+                      Descriptive link text helps visitors know what they'll see
+                      if they click the link. "Click here" doesn't cut it.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="bg-[#f5f8fa] flex flex-col justify-center text-center font-black">
+          <div className="h-full align-middle">
+            <div className="mb-15">
+              <div className="flex justify-center mt-15 mb-3 text-center">
+                <div className="flex justify-center items-center w-38 object-contain ">
+                  <Image
+                    src={"/images/file1.png"}
+                    width={200}
+                    height={200}
+                    alt="xyz"
+                  />
+                </div>
+              </div>
+              <div className="mt-6">
+                <div className="text-5xl font-bold">
+                  <span className="text-[#00bda5]">30</span>
+                  <span className="text-[#33475b] text-3xl">/30</span>
+                </div>
+                <div className="mb-[10px] inline-block relative w-60">
+                  <div className="bg-[#dbdbdb] h-[10px] rounded-full overflow-hidden">
+                    <div className="w-full bg-[#00bda5] h-full"></div>
+                  </div>
+                </div>
+              </div>
+              <h3 className="text-[#333] text-[32px] font-bold">Mobile</h3>
+              <div className="text-[#33475b] text-[16px] font-normal text-center leading-6 relative m-auto w-4/5 max-w-[690px] space-x-0">
+                Traffic from mobile devices is growing fast. Optimize your
+                website for mobile or you'll miss out on valuable traffic,
+                leads, and revenue.
+              </div>
+              <div className="flex justify-center">
+                <div className="border border-[#dfe3eb] rounded-[40px] bg-white my-[10px] px-5 py-[12px] flex items-center justify-center w-[460px]">
+                  {/* Trophy Icon */}
+                  <div className="bg-[url('/images/icon-mobile.png')] bg-center bg-no-repeat bg-[length:24px_21px] w-4 h-6 mr-3"></div>
+
+                  {/* Text */}
+                  <div className="text-[#516f90] text-xs leading-3 font-light flex">
+                    Improve your website performance with&nbsp;
+                    <span className="text-[#0073aa] font-bold">
+                      free 15-minute lesson
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-col md:flex-row justify-around font-serif">
+                {/* Box 1 */}
+                <div className="flex-1 bg-white border-r border-[#dbdbdb] last:border-r-0 p-4 m-[30px] pt-9 px-[30px] pb-[30px] shadow-md">
+                  <div className="text-[10px] font-medium relative leading-[14px] text-white">
+                    <div className="bg-[#00bda5] absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
+                      Pass
+                    </div>
+                  </div>
+                  <div className="text-[14px] leading-[19px] text-[#4a4a4a] mb-5 uppercase break-words">
+                    Permission To Index
+                  </div>
+                  <div className="relative h-15 w-13 mx-auto my-5">
+                    <Image src={"/images/pass.png"} fill alt="xyz"></Image>
+                  </div>
+                  <div>
+                    <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px]">
+                      Granted.
+                    </div>
+                    <div className="text-[#516f90] text-[14px] leading-[20px] my-[10px]">
+                      In order for a page to appear in search results, search
+                      engines must have permission to store it in their index.
+                      If they can't store it, no other changes matter.
+                    </div>
+                  </div>
+                </div>
+
+                {/* Box 2 */}
+                <div className="flex-1 bg-white border-r border-[#dbdbdb] last:border-r-0 p-4 m-[30px] pt-9 px-[30px] pb-[30px] shadow-md">
+                  <div className="text-[10px] font-medium relative leading-[14px] text-white">
+                    <div className="bg-[#00bda5] absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
+                      Pass
+                    </div>
+                  </div>
+                  <div className="text-[14px] leading-[19px] text-[#4a4a4a] mb-5 uppercase break-words">
+                    Legible Font Size
+                  </div>
+                  <div className="relative h-15 w-13 mx-auto my-5">
+                    <Image src={"/images/pass.png"} fill alt="xyz"></Image>
+                  </div>
+                  <div>
+                    <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px]">
+                      Easy on the eyes.
+                    </div>
+                    <div className="text-[#516f90] text-[14px] leading-[20px] my-[10px]">
+                      Visitors may have difficulty reading small text,
+                      especially on mobile devices. We recommend at least 12px.
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex-1 bg-white border-r border-[#dbdbdb] last:border-r-0 p-4 m-[30px] pt-9 px-[30px] pb-[30px] shadow-md">
+                  <div className="text-[10px] font-medium relative leading-[14px] text-white">
+                    <div className="bg-[#00bda5] absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
+                      Pass
+                    </div>
+                  </div>
+                  <div className="text-[14px] leading-[19px] text-[#4a4a4a] mb-5 uppercase break-words">
+                    Tap Targets
+                  </div>
+                  <div className="relative h-15 w-13 mx-auto my-5">
+                    <Image src={"/images/pass.png"} fill alt="xyz"></Image>
+                  </div>
+                  <div>
+                    <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px]">
+                      Clicking is so easy!
+                    </div>
+                    <div className="text-[#516f90] text-[14px] leading-[20px] my-[10px]">
+                      Mobile-friendly pages perform better in search results.
+                      Make sure interactive elements like buttons and links are
+                      not too small or too close together.
+                    </div>
+                  </div>
+                </div>
+
+                {/* Box 3 (Now Equal in Size) */}
+                <div className="flex-1 bg-white border-r border-[#dbdbdb] last:border-r-0 p-4 m-[30px] pt-9 px-[30px] pb-[30px] shadow-md">
+                  <div className="text-[10px] font-medium relative leading-[14px] text-white">
+                    <div className="bg-[#00bda5] absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
+                      Pass
+                    </div>
+                  </div>
+                  <div className="text-[14px] leading-[19px] text-[#4a4a4a] mb-5 uppercase break-words">
+                    Responsive
+                  </div>
+                  <div className="relative h-15 w-13 mx-auto my-5">
+                    <Image src={"/images/pass.png"} fill alt="xyz"></Image>
+                  </div>
+                  <div>
+                    <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px]">
+                      Fantastic! You're ready to face the future.
+                    </div>
+                    <div className="text-[#516f90] text-[14px] leading-[20px] my-[10px]">
+                      Responsive design gives you a bump in search rankings for
+                      searches on mobile devices.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="bg-[#f5f8fa] flex flex-col justify-center text-center font-black">
+          <div className="h-full align-middle">
+            <div className="mb-15">
+              <div className="flex justify-center mt-15 mb-3 text-center">
+                <div className="flex justify-center items-center w-38 object-contain ">
+                  <Image
+                    src={"/images/file1.png"}
+                    width={200}
+                    height={200}
+                    alt="xyz"
+                  />
+                </div>
+              </div>
+              <div className="mt-6">
+                <div className="text-5xl font-bold">
+                  <span className="text-[#00bda5]">10</span>
+                  <span className="text-[#33475b] text-3xl">/10</span>
+                </div>
+                <div className="mb-[10px] inline-block relative w-60">
+                  <div className="bg-[#dbdbdb] h-[10px] rounded-full overflow-hidden">
+                    <div className="w-full bg-[#00bda5] h-full"></div>
+                  </div>
+                </div>
+              </div>
+              <h3 className="text-[#333] text-[32px] font-bold">Security</h3>
+              <div className="text-[#33475b] text-[16px] font-normal text-center leading-6 relative m-auto w-4/5 max-w-[690px] space-x-0">
+                A secure website equipped with an SSL certificate and free from
+                vulnerabilities is now the standard online. People and search
+                engines love secure websites.
+              </div>
+              <div className="flex justify-center">
+                <div className="border border-[#dfe3eb] rounded-[40px] bg-white my-[10px] px-5 py-[12px] flex items-center justify-center w-[460px]">
+                  {/* Trophy Icon */}
+                  <div className="bg-[url('/images/icon-lock.png')] bg-center bg-no-repeat bg-[length:24px_21px] w-6 h-6 mr-3"></div>
+
+                  {/* Text */}
+                  <div className="text-[#516f90] text-xs leading-3 font-light flex">
+                    Improve your Site Security with&nbsp;
+                    <span className="text-[#0073aa] font-bold">
+                      free 15-minute lesson
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-col md:flex-row justify-around font-sans">
+                <div className="flex flex-col items-center min-h-[385px]">
+                  <div className="flex">
+                    <div className="flex">
+                      <div className="flex flex-row items-center justify-center text-left m-5 min-h-[250px]  bg-white shadow-md">
+                        <div className="flex items-center justify-center h-full w-full p-10 bg-gradient-to-br from-[#6a78d1] to-[#00a4bd]">
+                          <div className="w-[86px] h-[86px] m-0 bg-[80px]]">
+                            <Image
+                              src={"/images/pass.png"}
+                              width={100}
+                              height={100}
+                              alt="xyz"
+                            />
+                          </div>
+                        </div>
+                        <div className="flex flex-col justify-center p-1 h-full">
+                          <div className="mb-2 text-[#4a4a4a] text-[14px] font-medium leading-[21px] uppercase break-words">
+                            HTTPS
+                          </div>
+                          <div>
+                            <div className="text-[14px] font-bold">
+                              Secured.
+                            </div>
+                            <div className="text-[#516f90] text-[14px] leading-[20px] my-[10px] font-normal">
+                              HTTPS protects websites from attacks and gives
+                              visitors confidence that your site is authentic
+                              and trustworthy.
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div></div>
+                    </div>
+                    <div className="flex flex-row items-center justify-center text-left m-5 min-h-[250px] bg-white shadow-md">
+                      <div className="flex items-center justify-center h-full w-full p-10 bg-gradient-to-br from-[#6a78d1] to-[#00a4bd]">
+                        <div className="w-[86px] h-[86px] m-0 bg-[80px]]">
+                          <Image
+                            src={"/images/icon-fail-large.png"}
+                            width={100}
+                            height={100}
+                            alt="xyz"
+                          />
+                        </div>
+                      </div>
+                      <div className="flex flex-col justify-center p-1 h-full">
+                        <div className="mb-2 text-[#4a4a4a] text-[14px] font-medium leading-[21px] uppercase break-words">
+                          Secure JavaScript libraries
+                        </div>
+                        <div>
+                          <div className="text-[14px] font-bold">
+                            I'm not feeling safe here.
+                          </div>
+                          <div className="text-[#516f90] text-[14px] leading-[20px] my-[10px] font-normal">
+                            Intruders can exploit outdated JavaScript libraries.
+                            Using the latest version of each library and
+                            updating it regularly will help keep you safe.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* <div className="bg-[#f5f8fa] pb-[150px] text-center">
+          <div>
+            <div className="mx-auto max-w-[1160px]">
+              <h3 className="text-[#333] mt-0 mb-[60px] text-[32px] font-bold leading-[44px]">What should I do next?
+              </h3>
+              <div className="pb-[10px]">
+                <table className="font-medium text-[#33475b] leading-6 text-[14px] m-0 text-center bg-white border-collapse w-full border-[#dfe3eb] border-solid border-2 table">
+                  <colgroup className="table-column-group">
+                  <col className="w-[240x]"></col>
+                  </colgroup>
+                  <thead className="table-header-group align-middle border-inherit">
+                    <tr className="table-row align-middle border-inherit">
+                      <th className="table-cell text-[12px] bg-[#f5f8fa] text-[#33475b] h-[44px] text-left uppercase align-middle pt-2 pb-1 px-6">x</th>
+                      <th className="table-cell text-[12px] bg-[#f5f8fa] text-[#33475b] h-[44px] text-left uppercase align-middle pt-2 pb-1 px-6">y</th>
+                      <th className="table-cell text-[12px] bg-[#f5f8fa] text-[#33475b] h-[44px] text-left uppercase align-middle pt-2 pb-1 px-6">y</th>
+                      <th className="table-cell text-[12px] bg-[#f5f8fa] text-[#33475b] h-[44px] text-left uppercase align-middle pt-2 pb-1 px-6">z</th>
+                    </tr>
+                  </thead>
+                  <tbody className="table-row-group align-middle border-inherit">
+                    <tr className="table-row align-middle border-inherit">
+                      <td className="table-cell border-[#dfe3eb] border-solid h-18 py-4 px-6 align-middle break-words hyphens-auto">hii</td>
+                      <td className="table-cell border-[#dfe3eb] border-solid h-18 py-4 px-6 align-middle break-words hyphens-auto">byee</td>
+                      <td className="table-cell border-[#dfe3eb] border-solid h-18 py-4 px-6 align-middle break-words hyphens-auto">byee</td>
+                      <td className="table-cell border-[#dfe3eb] border-solid h-18 py-4 px-6 align-middle break-words hyphens-auto">GN</td>
+                    </tr>
+                    <tr className="table-row align-middle border-inherit">
+                      <td className="table-cell border-[#dfe3eb] border-solid h-18 py-4 px-6 align-middle break-words hyphens-auto">hii</td>
+                      <td className="table-cell border-[#dfe3eb] border-solid h-18 py-4 px-6 align-middle break-words hyphens-auto">byee</td>
+                      <td className="table-cell border-[#dfe3eb] border-solid h-18 py-4 px-6 align-middle break-words hyphens-auto">byee</td>
+                      <td className="table-cell border-[#dfe3eb] border-solid h-18 py-4 px-6 align-middle break-words hyphens-auto">GN</td>
+                    </tr>
+                    <tr className="table-row align-middle border-inherit">
+                      <td className="table-cell border-[#dfe3eb] border-solid h-18 py-4 px-6 align-middle break-words hyphens-auto">hii</td>
+                      <td className="table-cell border-[#dfe3eb] border-solid h-18 py-4 px-6 align-middle break-words hyphens-auto">byee</td>
+                      <td className="table-cell border-[#dfe3eb] border-solid h-18 py-4 px-6 align-middle break-words hyphens-auto">byee</td>
+                      <td className="table-cell border-[#dfe3eb] border-solid h-18 py-4 px-6 align-middle break-words hyphens-auto">GN</td>
+                    </tr>
+                    <tr className="table-row align-middle border-inherit">
+                      <td className="table-cell border-[#dfe3eb] border-solid h-18 py-4 px-6 align-middle break-words hyphens-auto">hii</td>
+                      <td className="table-cell border-[#dfe3eb] border-solid h-18 py-4 px-6 align-middle break-words hyphens-auto">byee</td>
+                      <td className="table-cell border-[#dfe3eb] border-solid h-18 py-4 px-6 align-middle break-words hyphens-auto">byee</td>
+                      <td className="table-cell border-[#dfe3eb] border-solid h-18 py-4 px-6 align-middle break-words hyphens-auto">GN</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div> */}
       </div>
     </div>
   );
