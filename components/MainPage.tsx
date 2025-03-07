@@ -4,6 +4,7 @@ import { useLighthouse } from "../context/LightHouseContext";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import CircleSmall from "./CircleSmall";
 import Button from "./Button";
 import CircleProgress from "./CircleProgress";
 
@@ -22,7 +23,7 @@ export default function ResultsPage() {
   return (
     <div
       id="main"
-      className="relative flex flex-col md:flex-row h-screen overflow-y-auto"
+      className="relative flex flex-col md:flex-row h-screen overflow-y-auto font-sans"
     >
       {/* Sidebar */}
       <div
@@ -141,13 +142,12 @@ export default function ResultsPage() {
 
           {/* Image Section */}
           <div className="flex mt-[20px] mb-[20px] justify-center">
-          {/* <embed type="image/jpg" src={data.screenshotBase64} width="300" height="200"/> */}
+            {/* <embed type="image/jpg" src={data.screenshotBase64} width="300" height="200"/> */}
             <Image
               className="text-[14px] font-['Lexend_Deca','Helvetica','Arial',sans-serif]
               text-center text-white box-border border-0 bg-white 
               h-[300px] w-[500px] md:h-[409px] md:w-[760px] max-w-full rounded-b-lg shadow-lg "
               src={data.screenshotBase64}
-              
               width={1000}
               height={1000}
               alt={`Screenshot of ${data.url}`}
@@ -195,6 +195,177 @@ export default function ResultsPage() {
                     <span className="text-[#0073aa] font-bold">
                       free 15-minute lesson
                     </span>
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-col md:flex-row justify-around font-serif">
+                {/* Box 1 */}
+                <div className="flex-1 bg-white border-r border-[#dbdbdb] last:border-r-0 p-4 m-[30px] pt-9 px-[30px] pb-[30px] shadow-md">
+                  <div className="text-[14px] leading-[19px] text-[#4a4a4a] mb-5 uppercase break-words">
+                    Page size
+                  </div>
+                  <CircleSmall score={data.pageSizeScore} />
+                  <div>
+                    <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px]">
+                      So fast! So light!
+                    </div>
+                    <div className="text-[#516f90] text-[14px] leading-[20px] my-[10px]">
+                      The heavier the site page, the slower the load. For
+                      optimal performance, try to keep page size below 3MB.
+                    </div>
+                  </div>
+                </div>
+
+                {/* Box 2 */}
+                <div className="flex-1 bg-white border-r border-[#dbdbdb] last:border-r-0 p-4 m-[30px] pt-9 px-[30px] pb-[30px] shadow-md">
+                  <div className="text-[14px] leading-[19px] text-[#4a4a4a] mb-5 uppercase break-words">
+                    Page Requests
+                  </div>
+                  <CircleSmall score={data.pageSizeScore} />
+                  <div>
+                    <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px]">
+                      You make this look easy.
+                    </div>
+                    <div className="text-[#516f90] text-[14px] leading-[20px] my-[10px]">
+                      The more HTTP requests your website makes, the slower it
+                      becomes. Try reducing the number of files your site loads.
+                    </div>
+                  </div>
+                </div>
+
+                {/* Box 3 (Now Equal in Size) */}
+                <div className="flex-1 flex flex-col items-center justify-center bg-white border-r border-[#dbdbdb] last:border-r-0 p-4 m-[30px] pt-9 px-[30px] pb-[30px] shadow-md">
+                  <div className="text-[14px] leading-[19px] text-[#4a4a4a] mb-5 uppercase break-words text-center">
+                    Page Speed
+                  </div>
+                  <CircleSmall score={data.pageSizeScore} />
+                  <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px] text-center">
+                    Zoom zoom. Nice work.
+                  </div>
+                  <div className="text-[#516f90] text-[14px] leading-[20px] my-[10px] text-center">
+                    Best-in-class webpages should become interactive within 5.3
+                    seconds. Any slower and visitors will abandon your site,
+                    reducing conversions and sales.
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-col md:flex-row justify-around font-serif">
+                {/* Box 1 */}
+                <div className="flex-1 bg-white border-r border-[#dbdbdb] last:border-r-0 p-4 m-[30px] pt-9 px-[30px] pb-[30px] shadow-md">
+                  <div className="text-[10px] font-medium relative leading-[14px] text-white">
+                    <div className="bg-[#00bda5] absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
+                      Pass
+                    </div>
+                  </div>
+                  <div className="text-[14px] leading-[19px] text-[#4a4a4a] mb-5 uppercase break-words">
+                    Browser Caching
+                  </div>
+                  <div className="relative h-15 w-13 mx-auto my-5">
+                    <Image src={"/images/pass.png"} fill alt="xyz"></Image>
+                  </div>
+                  <div>
+                    <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px]">
+                      Wowee. Your web caching is world class.
+                    </div>
+                    <div className="text-[#516f90] text-[14px] leading-[20px] my-[10px]">
+                      Browser caching speeds up your website by storing
+                      frequently used content in local memory.
+                    </div>
+                  </div>
+                </div>
+
+                {/* Box 2 */}
+                <div className="flex-1 bg-white border-r border-[#dbdbdb] last:border-r-0 p-4 m-[30px] pt-9 px-[30px] pb-[30px] shadow-md">
+                  <div className="text-[10px] font-medium relative leading-[14px] text-white">
+                    <div className="bg-[#00bda5] absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
+                      Pass
+                    </div>
+                  </div>
+                  <div className="text-[14px] leading-[19px] text-[#4a4a4a] mb-5 uppercase break-words">
+                    Minimal Page Redirects
+                  </div>
+                  <div className="relative h-15 w-13 mx-auto my-5">
+                    <Image src={"/images/pass.png"} fill alt="xyz"></Image>
+                  </div>
+                  <div>
+                    <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px]">
+                      Straight to the point.
+                    </div>
+                    <div className="text-[#516f90] text-[14px] leading-[20px] my-[10px]">
+                      Multiple redirects can make your site load slower. Aim for
+                      no more than one redirect.
+                    </div>
+                  </div>
+                </div>
+
+                {/* Box 3 (Now Equal in Size) */}
+                <div className="flex-1 bg-white border-r border-[#dbdbdb] last:border-r-0 p-4 m-[30px] pt-9 px-[30px] pb-[30px] shadow-md">
+                  <div className="text-[10px] font-medium relative leading-[14px] text-white">
+                    <div className="bg-[#00bda5] absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
+                      Pass
+                    </div>
+                  </div>
+                  <div className="text-[14px] leading-[19px] text-[#4a4a4a] mb-5 uppercase break-words">
+                    Image Size
+                  </div>
+                  <div className="relative h-15 w-13 mx-auto my-5">
+                    <Image src={"/images/pass.png"} fill alt="xyz"></Image>
+                  </div>
+                  <div>
+                    <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px]">
+                      They fit perfectly!
+                    </div>
+                    <div className="text-[#516f90] text-[14px] leading-[20px] my-[10px]">
+                      Images can take a long time to load. Use responsive images
+                      or SVGs to optimize your images for different screen
+                      sizes.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="flex mx-auto max-w-[700px] font-serif">
+                <div className="flex-1 bg-white m-[30px] px-[30px] pt-[36px] pb-[30px] shadow-md">
+                  <div className="text-[10px] font-medium relative leading-[14px] text-white">
+                    <div className="bg-[#00bda5] absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
+                      Pass
+                    </div>
+                  </div>
+                  <div className="text-[14px] leading-[19px] text-[#4a4a4a] mb-5 uppercase break-words">
+                    Minified Javascript
+                  </div>
+                  <div className="relative h-15 w-13 mx-auto my-5">
+                    <Image src={"/images/pass.png"} fill alt="xyz"></Image>
+                  </div>
+                  <div>
+                    <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px]">
+                      Have you been working out?
+                    </div>
+                    <div className="text-[#516f90] text-[14px] leading-[20px] my-[10px]">
+                      When your JavaScript is properly compressed, it makes your
+                      website run much faster.
+                    </div>
+                  </div>
+                </div>
+                <div className="flex-1 bg-white m-[30px] px-[30px] pt-[36px] pb-[30px] shadow-md">
+                  <div className="text-[10px] font-medium relative leading-[14px] text-white">
+                    <div className="bg-[#00bda5] absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
+                      Pass
+                    </div>
+                  </div>
+                  <div className="text-[14px] leading-[19px] text-[#4a4a4a] mb-5 uppercase break-words">
+                    Minified CSS
+                  </div>
+                  <div className="relative h-15 w-13 mx-auto my-5">
+                    <Image src={"/images/pass.png"} fill alt="xyz"></Image>
+                  </div>
+                  <div>
+                    <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px]">
+                      Short and sweet.
+                    </div>
+                    <div className="text-[#516f90] text-[14px] leading-[20px] my-[10px]">
+                      When your CSS is properly compressed, it makes your
+                      website run much faster.
+                    </div>
                   </div>
                 </div>
               </div>
