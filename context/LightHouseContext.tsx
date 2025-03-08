@@ -6,6 +6,15 @@ type LighthouseData = {
   url: string;
   pageSizeScore: number;
   screenshotBase64: string;
+  pageSizeReturn:string;
+  numberOfPageRequests:number;
+  totalLoadTime:string;
+  cachingAudit:number;
+  redirectsAudit:number;
+  ImageSizeAudit:number;
+  minJSAudit:number;
+  minCSS:number;
+  perm_to_index:boolean;
 } | null;
 
 type LighthouseContextType = {

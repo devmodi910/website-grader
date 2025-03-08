@@ -11,6 +11,16 @@ import CircleProgress from "./CircleProgress";
 export default function ResultsPage() {
   const { data } = useLighthouse();
   const router = useRouter();
+  const cacheQualtiy: boolean =
+    data?.cachingAudit !== undefined && data.cachingAudit >= 0.5;
+  const redirectQualtiy: boolean =
+    data?.cachingAudit !== undefined && data.cachingAudit >= 0.5;
+  const ImageQualtiy: boolean =
+    data?.cachingAudit !== undefined && data.cachingAudit >= 0.8;
+  const JSQualtiy: boolean =
+    data?.cachingAudit !== undefined && data.cachingAudit >= 0.8;
+  const CSSQualtiy: boolean =
+    data?.cachingAudit !== undefined && data.cachingAudit >= 0.8;
 
   useEffect(() => {
     if (!data) {
@@ -148,6 +158,7 @@ export default function ResultsPage() {
               text-center text-white box-border border-0 bg-white 
               h-[300px] w-[500px] md:h-[409px] md:w-[760px] max-w-full rounded-b-lg shadow-lg "
               src={data.screenshotBase64}
+              priority
               width={1000}
               height={1000}
               alt={`Screenshot of ${data.url}`}
@@ -198,13 +209,19 @@ export default function ResultsPage() {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col md:flex-row justify-around font-serif">
+              <div className="font-sans flex flex-col md:flex-row justify-around">
                 {/* Box 1 */}
                 <div className="flex-1 bg-white border-r border-[#dbdbdb] last:border-r-0 p-4 m-[30px] pt-9 px-[30px] pb-[30px] shadow-md">
                   <div className="text-[14px] leading-[19px] text-[#4a4a4a] mb-5 uppercase break-words">
                     Page size
                   </div>
-                  <CircleSmall score={data.pageSizeScore} />
+                  <div>
+                    <CircleSmall score={data.pageSizeScore} />
+                    <div className=" flex text-[#2d3e50] relative text-[32px] font-medium h-[40px] uppercase justify-center">
+                      {data.pageSizeReturn}
+                      {/* <span className="text-[14px] uppercase">MB</span> */}
+                    </div>
+                  </div>
                   <div>
                     <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px]">
                       So fast! So light!
@@ -222,6 +239,10 @@ export default function ResultsPage() {
                     Page Requests
                   </div>
                   <CircleSmall score={data.pageSizeScore} />
+                  <div className="flex text-[#2d3e50] relative text-[32px] font-medium h-[40px] uppercase justify-center">
+                    {data.numberOfPageRequests}
+                    {/* <span className="text-[14px] uppercase">MB</span> */}
+                  </div>
                   <div>
                     <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px]">
                       You make this look easy.
@@ -239,6 +260,10 @@ export default function ResultsPage() {
                     Page Speed
                   </div>
                   <CircleSmall score={data.pageSizeScore} />
+                  <div className=" flex text-[#2d3e50] relative text-[32px] font-medium h-[40px] uppercase justify-center">
+                    {data.totalLoadTime}
+                    {/* <span className="text-[14px] uppercase">MB</span> */}
+                  </div>
                   <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px] text-center">
                     Zoom zoom. Nice work.
                   </div>
@@ -253,15 +278,29 @@ export default function ResultsPage() {
                 {/* Box 1 */}
                 <div className="flex-1 bg-white border-r border-[#dbdbdb] last:border-r-0 p-4 m-[30px] pt-9 px-[30px] pb-[30px] shadow-md">
                   <div className="text-[10px] font-medium relative leading-[14px] text-white">
-                    <div className="bg-[#00bda5] absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
-                      Pass
-                    </div>
+                    {cacheQualtiy ? (
+                      <div className="bg-[#00bda5] absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
+                        Pass
+                      </div>
+                    ) : (
+                      <div className="bg-red-400 absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
+                        Fail
+                      </div>
+                    )}
                   </div>
                   <div className="text-[14px] leading-[19px] text-[#4a4a4a] mb-5 uppercase break-words">
                     Browser Caching
                   </div>
                   <div className="relative h-15 w-13 mx-auto my-5">
-                    <Image src={"/images/pass.png"} fill alt="xyz"></Image>
+                    {cacheQualtiy ? (
+                      <Image src={"/images/pass.png"} fill alt="xyz"></Image>
+                    ) : (
+                      <Image
+                        src={"/images/icon-fail-large.png"}
+                        fill
+                        alt="xyz"
+                      ></Image>
+                    )}
                   </div>
                   <div>
                     <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px]">
@@ -277,15 +316,29 @@ export default function ResultsPage() {
                 {/* Box 2 */}
                 <div className="flex-1 bg-white border-r border-[#dbdbdb] last:border-r-0 p-4 m-[30px] pt-9 px-[30px] pb-[30px] shadow-md">
                   <div className="text-[10px] font-medium relative leading-[14px] text-white">
-                    <div className="bg-[#00bda5] absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
-                      Pass
-                    </div>
+                    {redirectQualtiy ? (
+                      <div className="bg-[#00bda5] absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
+                        Pass
+                      </div>
+                    ) : (
+                      <div className="bg-red-400 absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
+                        Fail
+                      </div>
+                    )}
                   </div>
                   <div className="text-[14px] leading-[19px] text-[#4a4a4a] mb-5 uppercase break-words">
                     Minimal Page Redirects
                   </div>
                   <div className="relative h-15 w-13 mx-auto my-5">
-                    <Image src={"/images/pass.png"} fill alt="xyz"></Image>
+                    {redirectQualtiy ? (
+                      <Image src={"/images/pass.png"} fill alt="xyz"></Image>
+                    ) : (
+                      <Image
+                        src={"/images/icon-fail-large.png"}
+                        fill
+                        alt="xyz"
+                      ></Image>
+                    )}
                   </div>
                   <div>
                     <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px]">
@@ -301,15 +354,29 @@ export default function ResultsPage() {
                 {/* Box 3 (Now Equal in Size) */}
                 <div className="flex-1 bg-white border-r border-[#dbdbdb] last:border-r-0 p-4 m-[30px] pt-9 px-[30px] pb-[30px] shadow-md">
                   <div className="text-[10px] font-medium relative leading-[14px] text-white">
-                    <div className="bg-[#00bda5] absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
-                      Pass
-                    </div>
+                    {ImageQualtiy ? (
+                      <div className="bg-[#00bda5] absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
+                        Pass
+                      </div>
+                    ) : (
+                      <div className="bg-red-400 absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
+                        Fail
+                      </div>
+                    )}
                   </div>
                   <div className="text-[14px] leading-[19px] text-[#4a4a4a] mb-5 uppercase break-words">
                     Image Size
                   </div>
                   <div className="relative h-15 w-13 mx-auto my-5">
-                    <Image src={"/images/pass.png"} fill alt="xyz"></Image>
+                    {ImageQualtiy ? (
+                      <Image src={"/images/pass.png"} fill alt="xyz"></Image>
+                    ) : (
+                      <Image
+                        src={"/images/icon-fail-large.png"}
+                        fill
+                        alt="xyz"
+                      ></Image>
+                    )}
                   </div>
                   <div>
                     <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px]">
@@ -326,15 +393,29 @@ export default function ResultsPage() {
               <div className="flex mx-auto max-w-[700px] font-serif">
                 <div className="flex-1 bg-white m-[30px] px-[30px] pt-[36px] pb-[30px] shadow-md">
                   <div className="text-[10px] font-medium relative leading-[14px] text-white">
-                    <div className="bg-[#00bda5] absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
-                      Pass
-                    </div>
+                    {JSQualtiy ? (
+                      <div className="bg-[#00bda5] absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
+                        Pass
+                      </div>
+                    ) : (
+                      <div className="bg-red-400 absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
+                        Fail
+                      </div>
+                    )}
                   </div>
                   <div className="text-[14px] leading-[19px] text-[#4a4a4a] mb-5 uppercase break-words">
                     Minified Javascript
                   </div>
                   <div className="relative h-15 w-13 mx-auto my-5">
-                    <Image src={"/images/pass.png"} fill alt="xyz"></Image>
+                    {JSQualtiy ? (
+                      <Image src={"/images/pass.png"} fill alt="xyz"></Image>
+                    ) : (
+                      <Image
+                        src={"/images/icon-fail-large.png"}
+                        fill
+                        alt="xyz"
+                      ></Image>
+                    )}
                   </div>
                   <div>
                     <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px]">
@@ -348,15 +429,29 @@ export default function ResultsPage() {
                 </div>
                 <div className="flex-1 bg-white m-[30px] px-[30px] pt-[36px] pb-[30px] shadow-md">
                   <div className="text-[10px] font-medium relative leading-[14px] text-white">
-                    <div className="bg-[#00bda5] absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
-                      Pass
-                    </div>
+                    {CSSQualtiy ? (
+                      <div className="bg-[#00bda5] absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
+                        Pass
+                      </div>
+                    ) : (
+                      <div className="bg-red-400 absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
+                        Fail
+                      </div>
+                    )}
                   </div>
                   <div className="text-[14px] leading-[19px] text-[#4a4a4a] mb-5 uppercase break-words">
                     Minified CSS
                   </div>
                   <div className="relative h-15 w-13 mx-auto my-5">
-                    <Image src={"/images/pass.png"} fill alt="xyz"></Image>
+                    {CSSQualtiy ? (
+                      <Image src={"/images/pass.png"} fill alt="xyz"></Image>
+                    ) : (
+                      <Image
+                        src={"/images/icon-fail-large.png"}
+                        fill
+                        alt="xyz"
+                      ></Image>
+                    )}
                   </div>
                   <div>
                     <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px]">
@@ -562,28 +657,32 @@ export default function ResultsPage() {
               </div>
               <div className="flex flex-col md:flex-row justify-around font-serif">
                 {/* Box 1 */}
-                <div className="flex-1 bg-white border-r border-[#dbdbdb] last:border-r-0 p-4 m-[30px] pt-9 px-[30px] pb-[30px] shadow-md">
-                  <div className="text-[10px] font-medium relative leading-[14px] text-white">
-                    <div className="bg-[#00bda5] absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
-                      Pass
-                    </div>
+                <div className="ml-[30px] top-[30px] mb-[20px] mr-[20px] inline-block relative">
+                  {/* Screenshot inside the iPhone Frame */}
+                  <div className="w-[218px] h-[360px] rounded-t-none rounded-b-[5%] overflow-hidden relative">
+                    {data.screenshotBase64 ? (
+                      <Image
+                        className="border-0"
+                        src={data.screenshotBase64}
+                        fill
+                        alt="Website Screenshot"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gray-200 flex items-center justify-center text-sm text-gray-600">
+                        No Screenshot
+                      </div>
+                    )}
                   </div>
-                  <div className="text-[14px] leading-[19px] text-[#4a4a4a] mb-5 uppercase break-words">
-                    Permission To Index
+
+                  {/* iPhone Frame Overlay */}
+                  <div className="absolute inset-0 w-[218px] h-[360px] pointer-events-none">
+                    <Image
+                      src={"/images/iphone-frame.png"}
+                      alt="iPhone Frame"
+                      fill
+                    />
                   </div>
-                  <div className="relative h-15 w-13 mx-auto my-5">
-                    <Image src={"/images/pass.png"} fill alt="xyz"></Image>
-                  </div>
-                  <div>
-                    <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px]">
-                      Granted.
-                    </div>
-                    <div className="text-[#516f90] text-[14px] leading-[20px] my-[10px]">
-                      In order for a page to appear in search results, search
-                      engines must have permission to store it in their index.
-                      If they can't store it, no other changes matter.
-                    </div>
-                  </div>
+
                 </div>
 
                 {/* Box 2 */}

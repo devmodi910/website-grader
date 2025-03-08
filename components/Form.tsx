@@ -8,28 +8,42 @@ import Link from "next/link";
 export default function Form() {
   const [loading, setLoading] = useState(false);
   const router = useRouter(); // ✅ Initialize Next.js router
-  const {setData} = useLighthouse();
+  const { setData } = useLighthouse();
 
   async function submit(formData: FormData) {
     const url = formData.get("url") as string;
-    
+
     if (!url) {
       console.error("URL is required");
       return;
     }
 
     setLoading(true); // ✅ Start loading state
-    
+
     try {
-      const response = await fetch(`/api/lighthouse?url=${encodeURIComponent(url)}`, {
-        method: "GET",
-      });
-      
+      const response = await fetch(
+        `/api/lighthouse?url=${encodeURIComponent(url)}`,
+        {
+          method: "GET",
+        }
+      );
 
       const data = await response.json();
-      console.log(data.pageSizeScore);
       // ✅ Redirect to results page with URL as query param
-      setData({url,pageSizeScore:data.pageSizeScore,screenshotBase64:data.screenshotBase64});
+      setData({
+        url,
+        pageSizeScore: data.pageSizeScore,
+        screenshotBase64: data.screenshotBase64,
+        pageSizeReturn: data.pageSizeReturn,
+        numberOfPageRequests: data.numberOfPageRequests,
+        totalLoadTime: data.totalLoadTime,
+        cachingAudit: data.cachingAudit,
+        redirectsAudit: data.redirectsAudit,
+        ImageSizeAudit: data.ImageSizeAudit,
+        minJSAudit: data.minJSAudit,
+        minCSS:data.minCSS,
+        perm_to_index:data.perm_to_index
+      });
       router.push(`/results`);
     } catch (error) {
       console.error("Error fetching Lighthouse results:", error);
