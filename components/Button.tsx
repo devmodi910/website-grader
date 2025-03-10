@@ -11,7 +11,7 @@ export default function Button() {
         className="hidden md:flex items-center border border-white gap-1 text-white px-4 py-2 rounded-full transition-all duration-300"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <img src="/images/icon-globe.png" alt="English" className="w-8 h-8"></img>
+        <img src="/images/icon-globe.webp" alt="English" className="w-8 h-8"></img>
         English
         <svg
           className={`w-2 h-2.5 ms-1 transition-transform duration-300 ${

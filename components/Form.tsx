@@ -18,9 +18,13 @@ export default function Form() {
       return;
     }
 
-    setLoading(true); // ✅ Start loading state
+    setLoading(true);
 
     try {
+      console.log(
+        "Fetching from API:",
+        `/api/lighthouse?url=${encodeURIComponent(url)}`
+      );
       const response = await fetch(
         `/api/lighthouse?url=${encodeURIComponent(url)}`,
         {
@@ -28,8 +32,16 @@ export default function Form() {
         }
       );
 
+      console.log("Response status:", response.status);
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("API error:", errorText);
+        throw new Error(`API error: ${response.status} ${errorText}`);
+      }
+
       const data = await response.json();
-      // ✅ Redirect to results page with URL as query param
+      console.log("API response data:", data);
       setData({
         url,
         pageSizeScore: data.pageSizeScore,
@@ -41,14 +53,18 @@ export default function Form() {
         redirectsAudit: data.redirectsAudit,
         ImageSizeAudit: data.ImageSizeAudit,
         minJSAudit: data.minJSAudit,
-        minCSS:data.minCSS,
-        perm_to_index:data.perm_to_index
+        minCSS: data.minCSS,
+        perm_to_index: data.perm_to_index,
+        metaDescriptionAudit: data.metaDescriptionAudit,
       });
       router.push(`/results`);
+
+      // Set data and redirect...
     } catch (error) {
       console.error("Error fetching Lighthouse results:", error);
+      // Show error to user
     } finally {
-      setLoading(false); // ✅ Stop loading state
+      setLoading(false);
     }
   }
 

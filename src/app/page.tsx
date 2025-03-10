@@ -10,8 +10,8 @@ export default function Component() {
       <div className="relative min-h-screen bg-[#2D3E50] font-sans overflow-hidden">
         {/* Background Images (Visible in md+ screens, hidden in sm) */}
         <div className="hidden md:block absolute inset-0">
-          <div className="absolute top-0 left-0 w-full h-full bg-[url('/images/blobsLeft.png')] bg-left-top bg-no-repeat bg-contain md:bg-auto opacity-100"></div>
-          <div className="absolute bottom-0 right-0 w-full h-full bg-[url('/images/blobsRight.png')] bg-right-bottom bg-no-repeat bg-contain md:bg-auto opacity-100"></div>
+          <div className="absolute top-0 left-0 w-full h-full bg-[url('/images/blobsLeft.webp')] bg-left-top bg-no-repeat bg-contain md:bg-auto opacity-100"></div>
+          <div className="absolute bottom-0 right-0 w-full h-full bg-[url('/images/blobsRight.webp')] bg-right-bottom bg-no-repeat bg-contain md:bg-auto opacity-100"></div>
         </div>
 
         {/* Header */}
@@ -29,7 +29,7 @@ export default function Component() {
           <div className="text-center mb-12">
             <div className="flex justify-center mb-6">
               <Image
-                src="/images/hubspot-tools-logo.png"
+                src="/images/hubspot-tools-logo.webp"
                 alt="HubSpot Logo"
                 width={150}
                 height={40}
@@ -99,7 +99,7 @@ export default function Component() {
           <div className="w-full md:w-[48%] flex justify-center">
             <Image
               className="rounded-lg"
-              src="/images/website-performance-rating.png"
+              src="/images/website-performance-rating.webp"
               alt="Website Performance Rating"
               width={400}
               height={400}

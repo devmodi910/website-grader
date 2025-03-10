@@ -16,11 +16,11 @@ export default function ResultsPage() {
   const redirectQualtiy: boolean =
     data?.cachingAudit !== undefined && data.cachingAudit >= 0.5;
   const ImageQualtiy: boolean =
-    data?.cachingAudit !== undefined && data.cachingAudit >= 0.8;
+    data?.cachingAudit !== undefined && data.cachingAudit >= 0.5;
   const JSQualtiy: boolean =
-    data?.cachingAudit !== undefined && data.cachingAudit >= 0.8;
+    data?.cachingAudit !== undefined && data.cachingAudit >= 0.5;
   const CSSQualtiy: boolean =
-    data?.cachingAudit !== undefined && data.cachingAudit >= 0.8;
+    data?.cachingAudit !== undefined && data.cachingAudit >= 0.5; 
 
   useEffect(() => {
     if (!data) {
@@ -118,7 +118,7 @@ export default function ResultsPage() {
         <div className="flex justify-between p-4">
           <div className="flex items-center">
             <Image
-              src="/images/hubspot-tools-logo.png"
+              src="/images/hubspot-tools-logo.webp"
               alt="HubSpot Logo"
               width={150}
               height={40}
@@ -171,7 +171,7 @@ export default function ResultsPage() {
               <div className="flex justify-center mt-15 mb-3 text-center">
                 <div className="flex justify-center items-center w-38 object-contain ">
                   <Image
-                    src={"/images/file1.png"}
+                    src={"/images/file1.webp"}
                     width={200}
                     height={200}
                     alt="xyz"
@@ -198,7 +198,7 @@ export default function ResultsPage() {
               <div className="flex justify-center">
                 <div className="border border-[#dfe3eb] rounded-[40px] bg-white my-[10px] px-5 py-[12px] flex items-center justify-center w-[460px]">
                   {/* Trophy Icon */}
-                  <div className="bg-[url('/images/icon-trophy.png')] bg-center bg-no-repeat bg-[length:24px_21px] w-6 h-6 mr-3"></div>
+                  <div className="bg-[url('/images/icon-trophy.webp')] bg-center bg-no-repeat bg-[length:24px_21px] w-6 h-6 mr-3"></div>
 
                   {/* Text */}
                   <div className="text-[#516f90] text-xs leading-3 font-light flex">
@@ -293,10 +293,10 @@ export default function ResultsPage() {
                   </div>
                   <div className="relative h-15 w-13 mx-auto my-5">
                     {cacheQualtiy ? (
-                      <Image src={"/images/pass.png"} fill alt="xyz"></Image>
+                      <Image src={"/images/pass.webp"} fill alt="xyz"></Image>
                     ) : (
                       <Image
-                        src={"/images/icon-fail-large.png"}
+                        src={"/images/icon-fail-large.webp"}
                         fill
                         alt="xyz"
                       ></Image>
@@ -331,10 +331,10 @@ export default function ResultsPage() {
                   </div>
                   <div className="relative h-15 w-13 mx-auto my-5">
                     {redirectQualtiy ? (
-                      <Image src={"/images/pass.png"} fill alt="xyz"></Image>
+                      <Image src={"/images/pass.webp"} fill alt="xyz"></Image>
                     ) : (
                       <Image
-                        src={"/images/icon-fail-large.png"}
+                        src={"/images/icon-fail-large.webp"}
                         fill
                         alt="xyz"
                       ></Image>
@@ -369,10 +369,10 @@ export default function ResultsPage() {
                   </div>
                   <div className="relative h-15 w-13 mx-auto my-5">
                     {ImageQualtiy ? (
-                      <Image src={"/images/pass.png"} fill alt="xyz"></Image>
+                      <Image src={"/images/pass.webp"} fill alt="xyz"></Image>
                     ) : (
                       <Image
-                        src={"/images/icon-fail-large.png"}
+                        src={"/images/icon-fail-large.webp"}
                         fill
                         alt="xyz"
                       ></Image>
@@ -408,10 +408,10 @@ export default function ResultsPage() {
                   </div>
                   <div className="relative h-15 w-13 mx-auto my-5">
                     {JSQualtiy ? (
-                      <Image src={"/images/pass.png"} fill alt="xyz"></Image>
+                      <Image src={"/images/pass.webp"} fill alt="xyz"></Image>
                     ) : (
                       <Image
-                        src={"/images/icon-fail-large.png"}
+                        src={"/images/icon-fail-large.webp"}
                         fill
                         alt="xyz"
                       ></Image>
@@ -444,10 +444,10 @@ export default function ResultsPage() {
                   </div>
                   <div className="relative h-15 w-13 mx-auto my-5">
                     {CSSQualtiy ? (
-                      <Image src={"/images/pass.png"} fill alt="xyz"></Image>
+                      <Image src={"/images/pass.webp"} fill alt="xyz"></Image>
                     ) : (
                       <Image
-                        src={"/images/icon-fail-large.png"}
+                        src={"/images/icon-fail-large.webp"}
                         fill
                         alt="xyz"
                       ></Image>
@@ -500,7 +500,7 @@ export default function ResultsPage() {
               <div className="flex justify-center">
                 <div className="border border-[#dfe3eb] rounded-[40px] bg-white my-[10px] px-5 py-[12px] flex items-center justify-center w-[460px]">
                   {/* Trophy Icon */}
-                  <div className="bg-[url('/images/search.png')] bg-center bg-no-repeat bg-[length:24px_21px] w-6 h-6 mr-3"></div>
+                  <div className="bg-[url('/images/search.webp')] bg-center bg-no-repeat bg-[length:24px_21px] w-6 h-6 mr-3"></div>
 
                   {/* Text */}
                   <div className="text-[#516f90] text-xs leading-3 font-light flex">
@@ -515,15 +515,29 @@ export default function ResultsPage() {
                 {/* Box 1 */}
                 <div className="flex-1 bg-white border-r border-[#dbdbdb] last:border-r-0 p-4 m-[30px] pt-9 px-[30px] pb-[30px] shadow-md">
                   <div className="text-[10px] font-medium relative leading-[14px] text-white">
-                    <div className="bg-[#00bda5] absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
-                      Pass
-                    </div>
+                  {data.perm_to_index ? (
+                      <div className="bg-[#00bda5] absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
+                        Pass
+                      </div>
+                    ) : (
+                      <div className="bg-red-400 absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
+                        Fail
+                      </div>
+                    )}
                   </div>
                   <div className="text-[14px] leading-[19px] text-[#4a4a4a] mb-5 uppercase break-words">
                     Permission To Index
                   </div>
                   <div className="relative h-15 w-13 mx-auto my-5">
-                    <Image src={"/images/pass.png"} fill alt="xyz"></Image>
+                  {data.perm_to_index ? (
+                      <Image src={"/images/pass.webp"} fill alt="xyz"></Image>
+                    ) : (
+                      <Image
+                        src={"/images/icon-fail-large.webp"}
+                        fill
+                        alt="xyz"
+                      ></Image>
+                    )}
                   </div>
                   <div>
                     <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px]">
@@ -540,15 +554,29 @@ export default function ResultsPage() {
                 {/* Box 2 */}
                 <div className="flex-1 bg-white border-r border-[#dbdbdb] last:border-r-0 p-4 m-[30px] pt-9 px-[30px] pb-[30px] shadow-md">
                   <div className="text-[10px] font-medium relative leading-[14px] text-white">
-                    <div className="bg-[#00bda5] absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
-                      Pass
-                    </div>
+                  {data.metaDescriptionAudit ? (
+                      <div className="bg-[#00bda5] absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
+                        Pass
+                      </div>
+                    ) : (
+                      <div className="bg-red-400 absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
+                        Fail
+                      </div>
+                    )}
                   </div>
                   <div className="text-[14px] leading-[19px] text-[#4a4a4a] mb-5 uppercase break-words">
                     Meta Description
                   </div>
                   <div className="relative h-15 w-13 mx-auto my-5">
-                    <Image src={"/images/pass.png"} fill alt="xyz"></Image>
+                  {data.metaDescriptionAudit ? (
+                      <Image src={"/images/pass.webp"} fill alt="xyz"></Image>
+                    ) : (
+                      <Image
+                        src={"/images/icon-fail-large.webp"}
+                        fill
+                        alt="xyz"
+                      ></Image>
+                    )}
                   </div>
                   <div>
                     <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px]">
@@ -571,7 +599,7 @@ export default function ResultsPage() {
                     Content Plugins
                   </div>
                   <div className="relative h-15 w-13 mx-auto my-5">
-                    <Image src={"/images/pass.png"} fill alt="xyz"></Image>
+                    <Image src={"/images/pass.webp"} fill alt="xyz"></Image>
                   </div>
                   <div>
                     <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px]">
@@ -595,7 +623,7 @@ export default function ResultsPage() {
                     Descriptive Link Text
                   </div>
                   <div className="relative h-15 w-13 mx-auto my-5">
-                    <Image src={"/images/pass.png"} fill alt="xyz"></Image>
+                    <Image src={"/images/pass.webp"} fill alt="xyz"></Image>
                   </div>
                   <div>
                     <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px]">
@@ -617,7 +645,7 @@ export default function ResultsPage() {
               <div className="flex justify-center mt-15 mb-3 text-center">
                 <div className="flex justify-center items-center w-38 object-contain ">
                   <Image
-                    src={"/images/file1.png"}
+                    src={"/images/file1.webp"}
                     width={200}
                     height={200}
                     alt="xyz"
@@ -644,7 +672,7 @@ export default function ResultsPage() {
               <div className="flex justify-center">
                 <div className="border border-[#dfe3eb] rounded-[40px] bg-white my-[10px] px-5 py-[12px] flex items-center justify-center w-[460px]">
                   {/* Trophy Icon */}
-                  <div className="bg-[url('/images/icon-mobile.png')] bg-center bg-no-repeat bg-[length:24px_21px] w-4 h-6 mr-3"></div>
+                  <div className="bg-[url('/images/icon-mobile.webp')] bg-center bg-no-repeat bg-[length:24px_21px] w-4 h-6 mr-3"></div>
 
                   {/* Text */}
                   <div className="text-[#516f90] text-xs leading-3 font-light flex">
@@ -677,7 +705,7 @@ export default function ResultsPage() {
                   {/* iPhone Frame Overlay */}
                   <div className="absolute inset-0 w-[218px] h-[360px] pointer-events-none">
                     <Image
-                      src={"/images/iphone-frame.png"}
+                      src={"/images/iphone-frame.webp"}
                       alt="iPhone Frame"
                       fill
                     />
@@ -696,7 +724,7 @@ export default function ResultsPage() {
                     Legible Font Size
                   </div>
                   <div className="relative h-15 w-13 mx-auto my-5">
-                    <Image src={"/images/pass.png"} fill alt="xyz"></Image>
+                    <Image src={"/images/pass.webp"} fill alt="xyz"></Image>
                   </div>
                   <div>
                     <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px]">
@@ -719,7 +747,7 @@ export default function ResultsPage() {
                     Tap Targets
                   </div>
                   <div className="relative h-15 w-13 mx-auto my-5">
-                    <Image src={"/images/pass.png"} fill alt="xyz"></Image>
+                    <Image src={"/images/pass.webp"} fill alt="xyz"></Image>
                   </div>
                   <div>
                     <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px]">
@@ -744,7 +772,7 @@ export default function ResultsPage() {
                     Responsive
                   </div>
                   <div className="relative h-15 w-13 mx-auto my-5">
-                    <Image src={"/images/pass.png"} fill alt="xyz"></Image>
+                    <Image src={"/images/pass.webp"} fill alt="xyz"></Image>
                   </div>
                   <div>
                     <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px]">
@@ -766,7 +794,7 @@ export default function ResultsPage() {
               <div className="flex justify-center mt-15 mb-3 text-center">
                 <div className="flex justify-center items-center w-38 object-contain ">
                   <Image
-                    src={"/images/file1.png"}
+                    src={"/images/file1.webp"}
                     width={200}
                     height={200}
                     alt="xyz"
@@ -793,7 +821,7 @@ export default function ResultsPage() {
               <div className="flex justify-center">
                 <div className="border border-[#dfe3eb] rounded-[40px] bg-white my-[10px] px-5 py-[12px] flex items-center justify-center w-[460px]">
                   {/* Trophy Icon */}
-                  <div className="bg-[url('/images/icon-lock.png')] bg-center bg-no-repeat bg-[length:24px_21px] w-6 h-6 mr-3"></div>
+                  <div className="bg-[url('/images/icon-lock.webp')] bg-center bg-no-repeat bg-[length:24px_21px] w-6 h-6 mr-3"></div>
 
                   {/* Text */}
                   <div className="text-[#516f90] text-xs leading-3 font-light flex">
@@ -812,7 +840,7 @@ export default function ResultsPage() {
                         <div className="flex items-center justify-center h-full w-full p-10 bg-gradient-to-br from-[#6a78d1] to-[#00a4bd]">
                           <div className="w-[86px] h-[86px] m-0 bg-[80px]]">
                             <Image
-                              src={"/images/pass.png"}
+                              src={"/images/pass.webp"}
                               width={100}
                               height={100}
                               alt="xyz"
@@ -841,7 +869,7 @@ export default function ResultsPage() {
                       <div className="flex items-center justify-center h-full w-full p-10 bg-gradient-to-br from-[#6a78d1] to-[#00a4bd]">
                         <div className="w-[86px] h-[86px] m-0 bg-[80px]]">
                           <Image
-                            src={"/images/icon-fail-large.png"}
+                            src={"/images/icon-fail-large.webp"}
                             width={100}
                             height={100}
                             alt="xyz"

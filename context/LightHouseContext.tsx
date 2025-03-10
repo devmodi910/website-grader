@@ -1,7 +1,6 @@
 "use client";
 import { createContext, useContext, useState, ReactNode } from "react";
 
-// Define types
 type LighthouseData = {
   url: string;
   pageSizeScore: number;
@@ -15,6 +14,7 @@ type LighthouseData = {
   minJSAudit:number;
   minCSS:number;
   perm_to_index:boolean;
+  metaDescriptionAudit:boolean;
 } | null;
 
 type LighthouseContextType = {
@@ -22,10 +22,8 @@ type LighthouseContextType = {
   setData: (data: LighthouseData) => void;
 };
 
-// Create context
 const LighthouseContext = createContext<LighthouseContextType | undefined>(undefined);
 
-// Provider component
 export function LighthouseProvider({ children }: { children: ReactNode }) {
   const [data, setData] = useState<LighthouseData>(null);
 
@@ -36,7 +34,6 @@ export function LighthouseProvider({ children }: { children: ReactNode }) {
   );
 }
 
-// Hook to use context
 export function useLighthouse() {
   const context = useContext(LighthouseContext);
   if (!context) {

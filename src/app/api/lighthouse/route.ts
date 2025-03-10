@@ -11,9 +11,10 @@ export async function GET(req: NextRequest) {
   try {
     const { fetchWebsiteDetails } = await import("../../actions/fetchWebsiteDetails");
     const result = await fetchWebsiteDetails(url);
-
+    
     return NextResponse.json(result, { status: 200 });
   } catch (error) {
+    console.error("API error:", error);
     return NextResponse.json(
       { error: error instanceof Error ? error.message : "An unknown error occurred" },
       { status: 500 }
