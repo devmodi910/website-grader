@@ -15,6 +15,9 @@ type LighthouseData = {
   minCSS:number;
   perm_to_index:boolean;
   metaDescriptionAudit:boolean;
+  pluginsAudit:boolean;
+  linkTextAudit:number;
+  mobileScreenshot:string;
 } | null;
 
 type LighthouseContextType = {

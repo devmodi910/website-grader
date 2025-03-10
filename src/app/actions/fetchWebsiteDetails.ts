@@ -11,57 +11,77 @@ export async function fetchWebsiteDetails(url: string) {
   }
 
   try {
-    const response = await fetch(
-      `${API_URL}?url=${encodeURIComponent(url)}&category=performance&category=seo&key=${API_KEY}`
-    );
+    const [desktopResponse, mobileResponse] = await Promise.all([
+      fetch(`${API_URL}?url=${encodeURIComponent(url)}&category=performance&category=seo&key=${API_KEY}`),
+      fetch(`${API_URL}?url=${encodeURIComponent(url)}&category=performance&category=seo&category=accessibility&strategy=mobile&key=${API_KEY}`)
+    ]);
 
-    if (!response.ok) {
-      throw new Error(`Failed to fetch data: ${response.statusText}`);
+    if (!desktopResponse.ok || !mobileResponse.ok) {
+      throw new Error("Failed to fetch Lighthouse data");
     }
 
-    const data = await response.json();
-    const lighthouseResult = data.lighthouseResult.audits;
+    const [desktopData, mobileData] = await Promise.all([
+      desktopResponse.json(),
+      mobileResponse.json()
+    ]);
+
+    const desktopLighthouse = desktopData.lighthouseResult.audits;
+    const mobileLighthouse = mobileData.lighthouseResult.audits;
 
     const totalByteWeight =
-      lighthouseResult["total-byte-weight"]?.numericValue ?? 0;
+    desktopLighthouse["total-byte-weight"]?.numericValue ?? 0;
     const pageSizeKB = totalByteWeight / 1024;
     const pageSizeMB = (pageSizeKB / 1024).toFixed(2);
     const pageSizeReturn =
       pageSizeKB < 1000 ? pageSizeKB.toFixed(2) : pageSizeMB;
     const pageSizeScore = calculatePageSizeScore(pageSizeKB);
 
-    const screenshotAudit = lighthouseResult["final-screenshot"];
+    const screenshotAudit = desktopLighthouse["final-screenshot"];
     const screenshotBase64 = screenshotAudit?.details?.data ?? null;
 
-    const networkRequestsAudit = lighthouseResult["network-requests"]?.details;
+    const networkRequestsAudit = desktopLighthouse["network-requests"]?.details;
     const pageRequests =
       (networkRequestsAudit as { items?: any[] })?.items ?? [];
     const numberOfPageRequests = pageRequests.length;
 
-    const ttfb = lighthouseResult["server-response-time"]?.numericValue || 0;
-    const fcp = lighthouseResult["first-contentful-paint"]?.numericValue || 0;
+    const ttfb = desktopLighthouse["server-response-time"]?.numericValue || 0;
+    const fcp = desktopLighthouse["first-contentful-paint"]?.numericValue || 0;
     const lcp =
-    lighthouseResult["largest-contentful-paint"]?.numericValue || 0;
-    const tbt = lighthouseResult["total-blocking-time"]?.numericValue || 0;
+    desktopLighthouse["largest-contentful-paint"]?.numericValue || 0;
+    const tbt = desktopLighthouse["total-blocking-time"]?.numericValue || 0;
     const totalLoadTime = ((ttfb + (lcp - fcp) + tbt) / 1000).toFixed(2);
 
-    const cachingAudit = lighthouseResult["uses-long-cache-ttl"].score ?? null;
+    const cachingAudit = desktopLighthouse["uses-long-cache-ttl"].score ?? null;
 
-    const redirectsAudit = lighthouseResult["redirects"].score ?? null;
+    const redirectsAudit = desktopLighthouse["redirects"].score ?? null;
 
     const ImageSizeAudit =
-      lighthouseResult["uses-optimized-images"].score ?? null;
+    desktopLighthouse["uses-optimized-images"].score ?? null;
 
-    const minJSAudit = lighthouseResult["unminified-javascript"].score ?? null;
+    const minJSAudit = desktopLighthouse["unminified-javascript"].score ?? null;
 
-    const minCSS = lighthouseResult["unminified-css"].score ?? null;
+    const minCSS = desktopLighthouse["unminified-css"].score ?? null;
 
     const metaDescriptionAudit =
-      lighthouseResult["meta-description"]?.score ?? null;
-    const crawlable = lighthouseResult["is-crawlable"]?.score ?? null;
-    const is_robot = lighthouseResult["robots-txt"]?.score ?? null;
+    desktopLighthouse["meta-description"]?.score ?? null;
+    const crawlable = desktopLighthouse["is-crawlable"]?.score ?? null;
+    const is_robot = desktopLighthouse["robots-txt"]?.score ?? null;
     const perm_to_index =
       crawlable === 1 && is_robot !== null && is_robot !== 0;
+
+    const pluginsAudit = desktopLighthouse["content-plugins"]?.score ?? null;
+
+    const linkTextAudit = desktopLighthouse["link-text"]?.score ?? null;
+
+    const mobileImageAudit = mobileLighthouse["final-screenshot"];
+    const mobileScreenshot = mobileImageAudit?.details?.data ?? null;
+    console.log(mobileScreenshot)
+    console.log("Available Mobile Audits: ",Object.keys(mobileLighthouse));
+    const legibleFontSize = mobileLighthouse["font-display"]?.score ?? null
+    console.log(legibleFontSize)
+    console.log(mobileLighthouse["tap-targets"]?.score ?? "Audit not found");
+    const responsiveCheck = mobileLighthouse["viewport"]?.score ?? null
+    console.log(responsiveCheck)
 
       return {
         url,
@@ -78,6 +98,9 @@ export async function fetchWebsiteDetails(url: string) {
         minCSS,
         perm_to_index,
         metaDescriptionAudit,
+        pluginsAudit,
+        linkTextAudit,
+        mobileScreenshot,
       };
   } catch (error) {
     throw new Error(

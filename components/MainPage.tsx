@@ -14,13 +14,14 @@ export default function ResultsPage() {
   const cacheQualtiy: boolean =
     data?.cachingAudit !== undefined && data.cachingAudit >= 0.5;
   const redirectQualtiy: boolean =
-    data?.cachingAudit !== undefined && data.cachingAudit >= 0.5;
+    data?.redirectsAudit !== undefined && data.redirectsAudit >= 0.5;
   const ImageQualtiy: boolean =
-    data?.cachingAudit !== undefined && data.cachingAudit >= 0.5;
+    data?.ImageSizeAudit !== undefined && data.ImageSizeAudit >= 0.5;
   const JSQualtiy: boolean =
-    data?.cachingAudit !== undefined && data.cachingAudit >= 0.5;
+    data?.minJSAudit !== undefined && data.minJSAudit >= 0.8;
   const CSSQualtiy: boolean =
-    data?.cachingAudit !== undefined && data.cachingAudit >= 0.5; 
+    data?.minCSS !== undefined && data.minCSS >= 0.8;
+  const TextQuality: boolean = data?.linkTextAudit !== undefined && data.linkTextAudit >= 0.5;
 
   useEffect(() => {
     if (!data) {
@@ -515,7 +516,7 @@ export default function ResultsPage() {
                 {/* Box 1 */}
                 <div className="flex-1 bg-white border-r border-[#dbdbdb] last:border-r-0 p-4 m-[30px] pt-9 px-[30px] pb-[30px] shadow-md">
                   <div className="text-[10px] font-medium relative leading-[14px] text-white">
-                  {data.perm_to_index ? (
+                    {data.perm_to_index ? (
                       <div className="bg-[#00bda5] absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
                         Pass
                       </div>
@@ -529,7 +530,7 @@ export default function ResultsPage() {
                     Permission To Index
                   </div>
                   <div className="relative h-15 w-13 mx-auto my-5">
-                  {data.perm_to_index ? (
+                    {data.perm_to_index ? (
                       <Image src={"/images/pass.webp"} fill alt="xyz"></Image>
                     ) : (
                       <Image
@@ -554,7 +555,7 @@ export default function ResultsPage() {
                 {/* Box 2 */}
                 <div className="flex-1 bg-white border-r border-[#dbdbdb] last:border-r-0 p-4 m-[30px] pt-9 px-[30px] pb-[30px] shadow-md">
                   <div className="text-[10px] font-medium relative leading-[14px] text-white">
-                  {data.metaDescriptionAudit ? (
+                    {data.metaDescriptionAudit ? (
                       <div className="bg-[#00bda5] absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
                         Pass
                       </div>
@@ -568,7 +569,7 @@ export default function ResultsPage() {
                     Meta Description
                   </div>
                   <div className="relative h-15 w-13 mx-auto my-5">
-                  {data.metaDescriptionAudit ? (
+                    {data.metaDescriptionAudit ? (
                       <Image src={"/images/pass.webp"} fill alt="xyz"></Image>
                     ) : (
                       <Image
@@ -591,15 +592,29 @@ export default function ResultsPage() {
 
                 <div className="flex-1 bg-white border-r border-[#dbdbdb] last:border-r-0 p-4 m-[30px] pt-9 px-[30px] pb-[30px] shadow-md">
                   <div className="text-[10px] font-medium relative leading-[14px] text-white">
-                    <div className="bg-[#00bda5] absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
-                      Pass
-                    </div>
+                    {data.pluginsAudit ? (
+                      <div className="bg-[#00bda5] absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
+                        Pass
+                      </div>
+                    ) : (
+                      <div className="bg-red-400 absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
+                        Fail
+                      </div>
+                    )}
                   </div>
                   <div className="text-[14px] leading-[19px] text-[#4a4a4a] mb-5 uppercase break-words">
                     Content Plugins
                   </div>
                   <div className="relative h-15 w-13 mx-auto my-5">
-                    <Image src={"/images/pass.webp"} fill alt="xyz"></Image>
+                    {data.pluginsAudit ? (
+                      <Image src={"/images/pass.webp"} fill alt="xyz"></Image>
+                    ) : (
+                      <Image
+                        src={"/images/icon-fail-large.webp"}
+                        fill
+                        alt="xyz"
+                      ></Image>
+                    )}{" "}
                   </div>
                   <div>
                     <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px]">
@@ -687,11 +702,11 @@ export default function ResultsPage() {
                 {/* Box 1 */}
                 <div className="ml-[30px] top-[30px] mb-[20px] mr-[20px] inline-block relative">
                   {/* Screenshot inside the iPhone Frame */}
-                  <div className="w-[218px] h-[360px] rounded-t-none rounded-b-[5%] overflow-hidden relative">
-                    {data.screenshotBase64 ? (
+                  <div className="w-[218px] h-[360px] rounded-[5%] overflow-hidden relative">
+                    {data.mobileScreenshot ? (
                       <Image
                         className="border-0"
-                        src={data.screenshotBase64}
+                        src={data.mobileScreenshot}
                         fill
                         alt="Website Screenshot"
                       />
@@ -710,7 +725,6 @@ export default function ResultsPage() {
                       fill
                     />
                   </div>
-
                 </div>
 
                 {/* Box 2 */}

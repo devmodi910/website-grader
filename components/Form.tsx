@@ -56,6 +56,9 @@ export default function Form() {
         minCSS: data.minCSS,
         perm_to_index: data.perm_to_index,
         metaDescriptionAudit: data.metaDescriptionAudit,
+        pluginsAudit:data.pluginsAudit,
+        linkTextAudit:data.linkTextAudit,
+        mobileScreenshot:data.mobileScreenshot
       });
       router.push(`/results`);
 
