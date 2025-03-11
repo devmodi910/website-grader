@@ -7,7 +7,9 @@ type LighthouseData = {
   screenshotBase64: string;
   pageSizeReturn:string;
   numberOfPageRequests:number;
-  totalLoadTime:string;
+  networkPerformance:number;
+  totalLoadTime:number;
+  speedPerformance:number;
   cachingAudit:number;
   redirectsAudit:number;
   ImageSizeAudit:number;
@@ -18,6 +20,11 @@ type LighthouseData = {
   pluginsAudit:boolean;
   linkTextAudit:number;
   mobileScreenshot:string;
+  legibleFontSize:number;
+  responsiveCheck:number;
+  httpAudit:number;
+  secureLibAudit:number;
+  
 } | null;
 
 type LighthouseContextType = {

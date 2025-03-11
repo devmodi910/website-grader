@@ -19,9 +19,9 @@ export default function ResultsPage() {
     data?.ImageSizeAudit !== undefined && data.ImageSizeAudit >= 0.5;
   const JSQualtiy: boolean =
     data?.minJSAudit !== undefined && data.minJSAudit >= 0.8;
-  const CSSQualtiy: boolean =
-    data?.minCSS !== undefined && data.minCSS >= 0.8;
-  const TextQuality: boolean = data?.linkTextAudit !== undefined && data.linkTextAudit >= 0.5;
+  const CSSQualtiy: boolean = data?.minCSS !== undefined && data.minCSS >= 0.8;
+  const TextQuality: boolean =
+    data?.linkTextAudit !== undefined && data.linkTextAudit >= 0.5;
 
   useEffect(() => {
     if (!data) {
@@ -116,24 +116,24 @@ export default function ResultsPage() {
         <div className="absolute inset-0 bg-gradient-to-br from-[#6a78d1] to-[#00a4bd] h-[600px] -z-10"></div>
 
         {/* Header */}
-        <div className="flex justify-between p-4">
-          <div className="flex items-center">
-            <Image
-              src="/images/hubspot-tools-logo.webp"
-              alt="HubSpot Logo"
-              width={150}
-              height={40}
-            />
-            <div className="ml-2 text-xs text-white">WEBSITE GRADER</div>
-          </div>
-          <div className="rounded-full px-3 py-1 flex items-center space-x-1 cursor-pointer transition-colors duration-200">
-            <Button />
-          </div>
-        </div>
 
         {/* Main Content Section */}
-        <div className="flex flex-col align-middle mt-20">
-          <div className="max-w-2xl mx-auto text-white mb-4">
+        <div className="hidden lg:block">
+          <div className="flex justify-between p-4">
+            <div className="flex items-center">
+              <Image
+                src="/images/hubspot-tools-logo.webp"
+                alt="HubSpot Logo"
+                width={150}
+                height={40}
+              />
+              <div className="ml-2 text-xs text-white">WEBSITE GRADER</div>
+            </div>
+            <div className="rounded-full px-3 py-1 flex items-center space-x-1 cursor-pointer transition-colors duration-200">
+              <Button />
+            </div>
+          </div>
+          <div className="max-w-2xl mx-auto text-white mb-4 flex flex-col mt-20">
             <h1 className="text-5xl text-center font-bold mb-3">
               This site is great
             </h1>
@@ -239,7 +239,7 @@ export default function ResultsPage() {
                   <div className="text-[14px] leading-[19px] text-[#4a4a4a] mb-5 uppercase break-words">
                     Page Requests
                   </div>
-                  <CircleSmall score={data.pageSizeScore} />
+                  <CircleSmall score={data.networkPerformance} />
                   <div className="flex text-[#2d3e50] relative text-[32px] font-medium h-[40px] uppercase justify-center">
                     {data.numberOfPageRequests}
                     {/* <span className="text-[14px] uppercase">MB</span> */}
@@ -260,10 +260,11 @@ export default function ResultsPage() {
                   <div className="text-[14px] leading-[19px] text-[#4a4a4a] mb-5 uppercase break-words text-center">
                     Page Speed
                   </div>
-                  <CircleSmall score={data.pageSizeScore} />
+                  <CircleSmall score={data.speedPerformance} />
                   <div className=" flex text-[#2d3e50] relative text-[32px] font-medium h-[40px] uppercase justify-center">
-                    {data.totalLoadTime}
-                    {/* <span className="text-[14px] uppercase">MB</span> */}
+                    {(Number(data.totalLoadTime) / 100).toFixed(2)}
+
+                    <span className="text-[10px] flex justify-center">sec</span>
                   </div>
                   <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px] text-center">
                     Zoom zoom. Nice work.
@@ -391,7 +392,7 @@ export default function ResultsPage() {
                   </div>
                 </div>
               </div>
-              <div className="flex mx-auto max-w-[700px] font-serif">
+              <div className="flex flex-col md:flex-row mx-auto max-w-[700px] font-serif">
                 <div className="flex-1 bg-white m-[30px] px-[30px] pt-[36px] pb-[30px] shadow-md">
                   <div className="text-[10px] font-medium relative leading-[14px] text-white">
                     {JSQualtiy ? (
@@ -698,7 +699,7 @@ export default function ResultsPage() {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col md:flex-row justify-around font-serif">
+              <div className="flex flex-col md:flex-row justify-around font-serif items-center md:items-start">
                 {/* Box 1 */}
                 <div className="ml-[30px] top-[30px] mb-[20px] mr-[20px] inline-block relative">
                   {/* Screenshot inside the iPhone Frame */}
@@ -730,15 +731,29 @@ export default function ResultsPage() {
                 {/* Box 2 */}
                 <div className="flex-1 bg-white border-r border-[#dbdbdb] last:border-r-0 p-4 m-[30px] pt-9 px-[30px] pb-[30px] shadow-md">
                   <div className="text-[10px] font-medium relative leading-[14px] text-white">
-                    <div className="bg-[#00bda5] absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
-                      Pass
-                    </div>
+                    {data.legibleFontSize ? (
+                      <div className="bg-[#00bda5] absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
+                        Pass
+                      </div>
+                    ) : (
+                      <div className="bg-red-400 absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
+                        Fail
+                      </div>
+                    )}
                   </div>
                   <div className="text-[14px] leading-[19px] text-[#4a4a4a] mb-5 uppercase break-words">
                     Legible Font Size
                   </div>
                   <div className="relative h-15 w-13 mx-auto my-5">
-                    <Image src={"/images/pass.webp"} fill alt="xyz"></Image>
+                    {data.legibleFontSize ? (
+                      <Image src={"/images/pass.webp"} fill alt="xyz"></Image>
+                    ) : (
+                      <Image
+                        src={"/images/icon-fail-large.webp"}
+                        fill
+                        alt="xyz"
+                      ></Image>
+                    )}
                   </div>
                   <div>
                     <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px]">
@@ -778,15 +793,29 @@ export default function ResultsPage() {
                 {/* Box 3 (Now Equal in Size) */}
                 <div className="flex-1 bg-white border-r border-[#dbdbdb] last:border-r-0 p-4 m-[30px] pt-9 px-[30px] pb-[30px] shadow-md">
                   <div className="text-[10px] font-medium relative leading-[14px] text-white">
-                    <div className="bg-[#00bda5] absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
-                      Pass
-                    </div>
+                    {data.responsiveCheck ? (
+                      <div className="bg-[#00bda5] absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
+                        Pass
+                      </div>
+                    ) : (
+                      <div className="bg-red-400 absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
+                        Fail
+                      </div>
+                    )}
                   </div>
                   <div className="text-[14px] leading-[19px] text-[#4a4a4a] mb-5 uppercase break-words">
                     Responsive
                   </div>
                   <div className="relative h-15 w-13 mx-auto my-5">
-                    <Image src={"/images/pass.webp"} fill alt="xyz"></Image>
+                    {data.legibleFontSize ? (
+                      <Image src={"/images/pass.webp"} fill alt="xyz"></Image>
+                    ) : (
+                      <Image
+                        src={"/images/icon-fail-large.webp"}
+                        fill
+                        alt="xyz"
+                      ></Image>
+                    )}
                   </div>
                   <div>
                     <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px]">
@@ -846,67 +875,78 @@ export default function ResultsPage() {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col md:flex-row justify-around font-sans">
-                <div className="flex flex-col items-center min-h-[385px]">
-                  <div className="flex">
-                    <div className="flex">
-                      <div className="flex flex-row items-center justify-center text-left m-5 min-h-[250px]  bg-white shadow-md">
-                        <div className="flex items-center justify-center h-full w-full p-10 bg-gradient-to-br from-[#6a78d1] to-[#00a4bd]">
-                          <div className="w-[86px] h-[86px] m-0 bg-[80px]]">
+              <div className="flex flex-col md:flex-row justify-around font-sans w-full">
+                <div className="flex flex-col items-center min-h-[385px] w-full">
+                  <div className="flex flex-col md:flex-row w-full max-w-[900px]">
+                    {/* HTTPS Audit */}
+                    <div className="flex flex-col items-center text-left m-3 min-h-[250px] bg-white shadow-md w-full">
+                      <div className="flex items-center justify-center h-[120px] w-full bg-gradient-to-br from-[#6a78d1] to-[#00a4bd]">
+                        <div className="w-[86px] h-[86px]">
+                          {data.httpAudit ? (
                             <Image
                               src={"/images/pass.webp"}
                               width={100}
                               height={100}
                               alt="xyz"
                             />
-                          </div>
-                        </div>
-                        <div className="flex flex-col justify-center p-1 h-full">
-                          <div className="mb-2 text-[#4a4a4a] text-[14px] font-medium leading-[21px] uppercase break-words">
-                            HTTPS
-                          </div>
-                          <div>
-                            <div className="text-[14px] font-bold">
-                              Secured.
-                            </div>
-                            <div className="text-[#516f90] text-[14px] leading-[20px] my-[10px] font-normal">
-                              HTTPS protects websites from attacks and gives
-                              visitors confidence that your site is authentic
-                              and trustworthy.
-                            </div>
-                          </div>
+                          ) : (
+                            <Image
+                              src={"/images/icon-fail-large.webp"}
+                              width={100}
+                              height={100}
+                              alt="xyz"
+                            />
+                          )}
                         </div>
                       </div>
-                      <div></div>
-                    </div>
-                    <div className="flex flex-row items-center justify-center text-left m-5 min-h-[250px] bg-white shadow-md">
-                      <div className="flex items-center justify-center h-full w-full p-10 bg-gradient-to-br from-[#6a78d1] to-[#00a4bd]">
-                        <div className="w-[86px] h-[86px] m-0 bg-[80px]]">
-                          <Image
-                            src={"/images/icon-fail-large.webp"}
-                            width={100}
-                            height={100}
-                            alt="xyz"
-                          />
+                      <div className="flex flex-col justify-center p-4">
+                        <div className="mb-2 text-[#4a4a4a] text-[14px] font-medium leading-[21px] uppercase">
+                          HTTPS
                         </div>
-                      </div>
-                      <div className="flex flex-col justify-center p-1 h-full">
-                        <div className="mb-2 text-[#4a4a4a] text-[14px] font-medium leading-[21px] uppercase break-words">
-                          Secure JavaScript libraries
-                        </div>
-                        <div>
-                          <div className="text-[14px] font-bold">
-                            I'm not feeling safe here.
-                          </div>
-                          <div className="text-[#516f90] text-[14px] leading-[20px] my-[10px] font-normal">
-                            Intruders can exploit outdated JavaScript libraries.
-                            Using the latest version of each library and
-                            updating it regularly will help keep you safe.
-                          </div>
+                        <div className="text-[14px] font-bold">Secured.</div>
+                        <div className="text-[#516f90] text-[14px] leading-[20px] my-2">
+                          HTTPS protects websites from attacks and gives
+                          visitors confidence that your site is authentic and
+                          trustworthy.
                         </div>
                       </div>
                     </div>
-                    <div></div>
+
+                    {/* Secure JavaScript Libraries */}
+                    <div className="flex flex-col items-center text-left m-3 min-h-[250px] bg-white shadow-md w-full">
+                      <div className="flex items-center justify-center h-[120px] w-full bg-gradient-to-br from-[#6a78d1] to-[#00a4bd]">
+                        <div className="w-[86px] h-[86px]">
+                          {data.secureLibAudit ? (
+                            <Image
+                              src={"/images/pass.webp"}
+                              width={100}
+                              height={100}
+                              alt="xyz"
+                            />
+                          ) : (
+                            <Image
+                              src={"/images/icon-fail-large.webp"}
+                              width={100}
+                              height={100}
+                              alt="xyz"
+                            />
+                          )}
+                        </div>
+                      </div>
+                      <div className="flex flex-col justify-center p-4">
+                        <div className="mb-2 text-[#4a4a4a] text-[14px] font-medium leading-[21px] uppercase">
+                          Secure JavaScript Libraries
+                        </div>
+                        <div className="text-[14px] font-bold">
+                          I'm not feeling safe here.
+                        </div>
+                        <div className="text-[#516f90] text-[14px] leading-[20px] my-2">
+                          Intruders can exploit outdated JavaScript libraries.
+                          Using the latest version of each library and updating
+                          it regularly will help keep you safe.
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
