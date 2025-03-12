@@ -18,9 +18,9 @@ export default function Component() {
         <header className="relative flex justify-end items-center p-6">
           <div className="flex gap-2">
             <Button />
-            <button className="bg-transparent border border-white text-white px-4 py-3 rounded-full text-center hover:bg-slate-700 transition-all duration-300 transform hover:scale-105 flex flex-row">
+            <Link href="/FAQ" className="bg-transparent border border-white text-white px-4 py-3 rounded-full text-center hover:bg-slate-700 transition-all duration-300 transform hover:scale-105 flex flex-row">
               FAQ
-            </button>
+            </Link>
           </div>
         </header>
 
@@ -35,7 +35,7 @@ export default function Component() {
                 height={40}
               />
             </div>
-            <h1 className="text-lg max-w-md mx-auto md:text-5xl font-bold text-white mb-2">
+            <h1 className="text-[25px] max-w-md mx-auto md:text-[70xl] font-bold text-white mb-2">
               Website Grader<sup className="text-xl md:text-3xl">®</sup>
             </h1>
             <p className="text-white text-xs md:text-base max-w-md mx-auto mb-8">
@@ -75,30 +75,27 @@ export default function Component() {
         <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-8 mb-16 md:mt-10">
           {/* Text Section */}
           <div className="w-full md:w-[48%] text-center md:text-left">
-            <h2 className="text-3xl font-bold text-slate-700 mb-4">
+            <h2 className="text-[28px] md:text-3xl font-bold text-slate-700 mb-4">
               Get Your Website Rating in Seconds
             </h2>
-            <p className="text-sm text-slate-600 leading-relaxed">
+            <p className="text-[14px] md:text-xl text-slate-600 leading-relaxed font-sans">
               HubSpot's free website grader makes understanding website
               performance easy. The hardest part of building a site is often the
               guesswork. Which changes are important, and which aren't? It can
               sometimes feel impossible to tell. Our{" "}
-              <span className="text-teal-600 hover:text-teal-700 transition-colors">
+              <span className="text-teal-600 inline hover:text-teal-700 transition-colors">
                 online grader
               </span>{" "}
-              demystifies the whole process.
-            </p>
-            <p className="text-sm text-slate-600 mt-3">
-              Learn about your page performance, security, search engine
+              demystifies the whole process.Learn about your page performance, security, search engine
               optimization (SEO), and mobile experience. Discover what makes
               your site strong and uncover new opportunities for the future.
             </p>
           </div>
 
           {/* Image Section */}
-          <div className="w-full md:w-[48%] flex justify-center">
+          <div className="w-full md:w-[48%] flex justify-center mt-4">
             <Image
-              className="rounded-lg"
+              className="md:rounded-lg"
               src="/images/website-performance-rating.webp"
               alt="Website Performance Rating"
               width={400}
@@ -111,7 +108,7 @@ export default function Component() {
         {/* More Information Section */}
         
       </div>
-      <div className="bg-slate-100 py-12">
+      <div className="bg-slate-100 py-17">
           <h3 className="text-xl font-semibold text-center text-slate-700 mb-6">
             More Information
           </h3>

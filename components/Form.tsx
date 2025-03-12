@@ -76,7 +76,7 @@ export default function Form() {
         />
 
         <p className="text-white text-xs mb-6 text-left">
-          We're committed to your privacy. You may unsubscribe at any time. For more information, check out our{" "}
+        We're committed to your privacy. HubSpot uses the information you provide to us to contact you about our relevant content, products, and services. You may unsubscribe from these communications at any time. For more information, check out our {" "}
           <Link href="/webgrader" className="text-blue-400 hover:underline">
             Privacy Policy.
           </Link>

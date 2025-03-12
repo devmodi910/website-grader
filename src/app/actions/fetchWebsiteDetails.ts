@@ -11,13 +11,30 @@ export async function fetchWebsiteDetails(url: string) {
   }
 
   try {
+    const fetchWithTimeout = async (resource: string, options = {}) => {
+      const controller = new AbortController();
+      const id = setTimeout(() => controller.abort(), 60000);
+      
+      try {
+        const response = await fetch(resource, {
+          ...options,
+          signal: controller.signal,
+        });
+        clearTimeout(id);
+        return response;
+      } catch (error) {
+        clearTimeout(id);
+        throw error;
+      }
+    };
+
     const [desktopResponse, mobileResponse] = await Promise.all([
-      fetch(
+      fetchWithTimeout(
         `${API_URL}?url=${encodeURIComponent(
           url
         )}&category=performance&category=best-practices&category=seo&key=${API_KEY}`
-        ),
-        fetch(
+      ),
+      fetchWithTimeout(
         `${API_URL}?url=${encodeURIComponent(
           url
         )}&category=performance&category=seo&category=accessibility&strategy=mobile&key=${API_KEY}`
@@ -47,80 +64,111 @@ export async function fetchWebsiteDetails(url: string) {
     const screenshotAudit = desktopLighthouse["final-screenshot"];
     const screenshotBase64 = screenshotAudit?.details?.data ?? null;
 
-    const networkRequestsAudit = desktopLighthouse["network-requests"]?.details;
-    const pageRequests =
-      (networkRequestsAudit as { items?: any[] })?.items ?? [];
+    const networkRequestsAudit = desktopLighthouse["network-requests"];
+    const pageRequests = networkRequestsAudit?.details?.items || [];
     const numberOfPageRequests = pageRequests.length;
-    const networkPerformance =
-      calculateNetworkPerformance(numberOfPageRequests);
+    const networkPerformance = calculateNetworkPerformance(numberOfPageRequests);
 
-    const ttfb = desktopLighthouse["server-response-time"]?.numericValue || 0;
     const fcp = desktopLighthouse["first-contentful-paint"]?.numericValue || 0;
-    const lcp =
-      desktopLighthouse["largest-contentful-paint"]?.numericValue || 0;
+    const lcp = desktopLighthouse["largest-contentful-paint"]?.numericValue || 0;
     const tti = desktopLighthouse["interactive"]?.numericValue || 0;
-    const fid = desktopLighthouse["max-potential-fid"]?.numericValue || 0;
     const tbt = desktopLighthouse["total-blocking-time"]?.numericValue || 0;
     const speedIndex = desktopLighthouse["speed-index"]?.numericValue || 0;
-    const loadTime = desktopLighthouse["load"]?.numericValue || 0; // Page Load Event
-    const fullyLoaded = desktopLighthouse["fully-loaded"]?.numericValue || 0; // All assets loaded
+    const ttfb = desktopLighthouse["server-response-time"]?.numericValue || 0;
+    const fid = desktopLighthouse["max-potential-fid"]?.numericValue || 0;
+    const cls = desktopLighthouse["cumulative-layout-shift"]?.numericValue || 0;
+    
+    // FIXED: Get network timings from all requests to find true end time
+    let longestNetworkTime = 0;
+    if (pageRequests.length > 0) {
+      for (const request of pageRequests) {
+        // Some lighthouse versions use endTime, others use the finish property
+        const endTime = request.endTime || request.finish || 0;
+        if (endTime > longestNetworkTime) {
+          longestNetworkTime = endTime;
+        }
+      }
+    }
 
-    // 🚀 Corrected Calculation
-    const totalLoadTime = Math.max(
-      ttfb + tti + fid + tbt, // Main processing delays
-      lcp, // Largest visible element
-      speedIndex, // When most content appears
-      loadTime, // Document Load Event
-      fullyLoaded // Everything including scripts, APIs, etc.
-    );
+    // If we still can't get network time, estimate based on page size
+    if (longestNetworkTime <= 0) {
+      // Estimate network time based on page size and typical connection speed
+      // Average connection speed ~5 Mbps = 640 KB/s
+      const estimatedLoadTimeMs = (pageSizeKB / 640) * 1000;
+      longestNetworkTime = Math.max(estimatedLoadTimeMs, lcp * 1.5);
+      console.log(`Network time estimated from page size: ${longestNetworkTime.toFixed(2)}ms`);
+    }
 
-    // console.log(`Total Load Time (ms):`, totalLoadTime);
-    // console.log(`Total Load Time (s):`, (totalLoadTime / 1000).toFixed(2));
+    // NEW: Calculate more real-world metrics
+    
+    // 1. DNS resolution + connection setup (typical range: 100-300ms)
+    const connectionTime = 200;
+    
+    // 2. Resource fetch and parsing time
+    const resourceTime = Math.max(tti, longestNetworkTime);
+    
+    // 3. Add browser rendering overhead (typical range: 500-2000ms based on device)
+    const renderingOverhead = Math.min(pageSizeKB, 5000) * 0.3;
+    
+    // 4. Get full page load metrics
+    // Full page load should include the complete user experience from search to full render
+    const simulatedTotalLoadTime = connectionTime + ttfb + resourceTime + tbt + renderingOverhead;
+    
+    // Adjust to real-world conditions by applying a scaling factor
+    // Simulating differences between lab and real-world timing
+    const realWorldFactor = 1.5; // Lab tests are often 1.5-2x faster than real user experience
+    const totalLoadTime = simulatedTotalLoadTime * realWorldFactor;
+    
+    console.log({
+      ttfb,
+      lcp,
+      tti,
+      speedIndex,
+      longestNetworkTime,
+      tbt,
+      connectionTime,
+      resourceTime,
+      renderingOverhead,
+      simulatedTotalLoadTime,
+      realWorldFactor,
+      totalLoadTime,
+      totalLoadTimeSeconds: (totalLoadTime / 1000).toFixed(2)
+    });
 
-    const speedPerformance = calculatePageSpeed(totalLoadTime);
-    // console.log(`Speed Performance Score:`, speedPerformance);
+    // Calculate score based on realistic user perception (10-12 seconds target)
+    const speedPerformance = calculateRealisticPageSpeed(totalLoadTime);
 
-    const cachingAudit = desktopLighthouse["uses-long-cache-ttl"].score ?? null;
-    const redirectsAudit = desktopLighthouse["redirects"].score ?? null;
-    const ImageSizeAudit =
-      desktopLighthouse["uses-optimized-images"].score ?? null;
-    console.log(desktopLighthouse["uses-optimized-images"])
-    const minJSAudit = desktopLighthouse["unminified-javascript"].score ?? null;
-    const minCSS = desktopLighthouse["unminified-css"].score ?? null;
+    // Audit extraction
+    const cachingAudit = desktopLighthouse["uses-long-cache-ttl"]?.score ?? null;
+    const redirectsAudit = desktopLighthouse["redirects"]?.score ?? null;
+    const ImageSizeAudit = desktopLighthouse["uses-optimized-images"]?.score ?? null;
+    const minJSAudit = desktopLighthouse["unminified-javascript"]?.score ?? null;
+    const minCSS = desktopLighthouse["unminified-css"]?.score ?? null;
 
-    console.log(cachingAudit,redirectsAudit,ImageSizeAudit,minJSAudit,minCSS)
-    const metaDescriptionAudit =
-      desktopLighthouse["meta-description"]?.score ?? null;
+    // SEO audit checks
+    const metaDescriptionAudit = desktopLighthouse["meta-description"]?.score ?? null;
     const crawlable = desktopLighthouse["is-crawlable"]?.score ?? null;
     const is_robot = desktopLighthouse["robots-txt"]?.score ?? null;
-    const perm_to_index =
-      crawlable === 1 && is_robot !== null && is_robot !== 0;
+    const perm_to_index = crawlable === 1 && is_robot !== null && is_robot !== 0;
 
-    const pluginsAudit = desktopLighthouse["content-plugins"]?.score ?? null;
-
+    // Additional audits
+    const pluginsAudit = desktopLighthouse["plugins"]?.score ?? desktopLighthouse["content-plugins"]?.score ?? null;
     const linkTextAudit = desktopLighthouse["link-text"]?.score ?? null;
 
+    // Mobile audits
     const mobileImageAudit = mobileLighthouse["final-screenshot"];
     const mobileScreenshot = mobileImageAudit?.details?.data ?? null;
-    const legibleFontSize = mobileLighthouse["font-display"]?.score ?? null;
+    const legibleFontSize = mobileLighthouse["font-size"]?.score ?? null;
     const responsiveCheck = mobileLighthouse["viewport"]?.score ?? null;
 
-    const isOnHTTP = desktopLighthouse["is-on-http"]?.score ?? null;
+    // Security audits - FIXED
+    const isOnHTTPS = desktopLighthouse["is-on-https"]?.score ?? null;
     const redirectsToHTTPS = desktopLighthouse["redirects-http"]?.score ?? null;
+    const httpAudit = isOnHTTPS === 1 ? 1 : 0;
+    
+    // Additional security checks
+    const secureLibAudit = desktopLighthouse["no-vulnerable-libraries"]?.score ?? 1;
 
-    // console.log("HTTP Audit Results:", { isOnHTTP, redirectsToHTTPS });
-
-    // const secureLibAudit1 = desktopLighthouse["no-vulnerable-libraries"]?.score ?? null;
-    // console.log(secureLibAudit1);
-    // const jsLibraries = desktopLighthouse["js-libraries"]?.details?.items ?? [];
-    // const thirdPartyScripts =
-    //   desktopLighthouse["third-party-summary"]?.details?.items ?? [];
-
-    // console.log("JS Libraries Used:", jsLibraries);
-    // console.log("Third-Party Scripts Loaded:", thirdPartyScripts);
-
-    const httpAudit = 1;
-    const secureLibAudit = 1;
     return {
       url,
       totalPageSize: `${pageSizeKB.toFixed(2)} KB`,
@@ -130,6 +178,7 @@ export async function fetchWebsiteDetails(url: string) {
       numberOfPageRequests,
       networkPerformance,
       totalLoadTime,
+      totalLoadTimeSeconds: (totalLoadTime / 1000).toFixed(2),
       speedPerformance,
       cachingAudit,
       redirectsAudit,
@@ -145,6 +194,15 @@ export async function fetchWebsiteDetails(url: string) {
       responsiveCheck,
       httpAudit,
       secureLibAudit,
+      performanceMetrics: {
+        ttfb: (ttfb / 1000).toFixed(2),
+        fcp: (fcp / 1000).toFixed(2),
+        lcp: (lcp / 1000).toFixed(2),
+        tti: (tti / 1000).toFixed(2),
+        tbt: (tbt / 1000).toFixed(2),
+        cls,
+        estimatedFullLoadTime: (totalLoadTime / 1000).toFixed(2)
+      }
     };
   } catch (error) {
     throw new Error(
@@ -153,6 +211,7 @@ export async function fetchWebsiteDetails(url: string) {
   }
 }
 
+// Adjust page size score calculation
 function calculatePageSizeScore(kbSize: number) {
   if (kbSize >= 6000) return 0;
   return Math.max(0, Math.round(100 - (kbSize / 6000) * 100));
@@ -163,11 +222,11 @@ function calculateNetworkPerformance(numberOfPageRequests: number) {
   return Math.max(0, Math.round(100 - (numberOfPageRequests / 200) * 100));
 }
 
-function calculatePageSpeed(timeInMM: number) {
-  if (timeInMM >= 15000) return 0;
-
-  return Math.max(
-    0,
-    Math.round(100 - ((timeInMM - 1500) / (15000 - 1500)) * 100)
-  );
+// Adjusted to align with real-world expectation of 10-12 seconds
+function calculateRealisticPageSpeed(timeInMS: number) {
+  const maxAcceptableTime = 20000;
+  
+  if (timeInMS >= maxAcceptableTime) return 0;
+  
+  return Math.round(100 * Math.pow(1 - timeInMS / maxAcceptableTime, 2));
 }
