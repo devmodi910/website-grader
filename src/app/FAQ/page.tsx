@@ -10,7 +10,7 @@ export default function FAQ() {
     {
       question: "What does Website Grader do?",
       answer: (
-        <>
+        <div>
           <p>
             Website Grader analyzes your website to discover what it does well
             and flags areas where it could improve to benefit more from search
@@ -22,7 +22,7 @@ export default function FAQ() {
             <li>Mobile Friendliness</li>
             <li>Security</li>
           </ul>
-        </>
+        </div>
       ),
     },
 
@@ -107,7 +107,9 @@ export default function FAQ() {
 
                 {/* Answer Section - Expands Naturally */}
                 {openIndex === index && (
-                  <p className="mt-2 text-gray-300 text-sm">{item.answer}</p>
+                  <div className="mt-2 text-gray-300 text-sm">
+                    {item.answer}
+                  </div>
                 )}
               </div>
             ))}

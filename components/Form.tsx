@@ -31,6 +31,7 @@ export default function Form() {
         pageSizeScore: data.pageSizeScore,
         screenshotBase64: data.screenshotBase64,
         pageSizeReturn: data.pageSizeReturn,
+        pageSizeKB:data.pageSizeKB,
         numberOfPageRequests: data.numberOfPageRequests,
         totalLoadTime: data.totalLoadTime,
         cachingAudit: data.cachingAudit,
@@ -70,7 +71,7 @@ export default function Form() {
           className="w-full p-3 mb-4 rounded bg-transparent text-center border-b-2 border-slate-500 text-white focus:border-blue-400 outline-none transition-colors focus:placeholder-transparent"
         />
         <input
-          type="email"
+          type="email"  
           placeholder="Email"
           className="w-full p-3 mb-4 rounded bg-transparent text-center border-b-2 border-slate-500 text-white focus:border-blue-400 outline-none transition-colors focus:placeholder-transparent"
         />

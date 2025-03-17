@@ -5,6 +5,7 @@ type LighthouseData = {
   url: string;
   pageSizeScore: number;
   screenshotBase64: string;
+  pageSizeKB:number;
   pageSizeReturn:string;
   numberOfPageRequests:number;
   networkPerformance:number;
@@ -16,8 +17,8 @@ type LighthouseData = {
   minJSAudit:number;
   minCSS:number;
   perm_to_index:boolean;
-  metaDescriptionAudit:boolean;
-  pluginsAudit:boolean;
+  metaDescriptionAudit:number;
+  pluginsAudit:number;
   linkTextAudit:number;
   mobileScreenshot:string;
   legibleFontSize:number;

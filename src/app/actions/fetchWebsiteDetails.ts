@@ -96,7 +96,7 @@ export async function fetchWebsiteDetails(url: string) {
       // Average connection speed ~5 Mbps = 640 KB/s
       const estimatedLoadTimeMs = (pageSizeKB / 640) * 1000;
       longestNetworkTime = Math.max(estimatedLoadTimeMs, lcp * 1.5);
-      console.log(`Network time estimated from page size: ${longestNetworkTime.toFixed(2)}ms`);
+      // console.log(`Network time estimated from page size: ${longestNetworkTime.toFixed(2)}ms`);
     }
 
     // NEW: Calculate more real-world metrics
@@ -119,21 +119,21 @@ export async function fetchWebsiteDetails(url: string) {
     const realWorldFactor = 1.5; // Lab tests are often 1.5-2x faster than real user experience
     const totalLoadTime = simulatedTotalLoadTime * realWorldFactor;
     
-    console.log({
-      ttfb,
-      lcp,
-      tti,
-      speedIndex,
-      longestNetworkTime,
-      tbt,
-      connectionTime,
-      resourceTime,
-      renderingOverhead,
-      simulatedTotalLoadTime,
-      realWorldFactor,
-      totalLoadTime,
-      totalLoadTimeSeconds: (totalLoadTime / 1000).toFixed(2)
-    });
+    // console.log({
+    //   ttfb,
+    //   lcp,
+    //   tti,
+    //   speedIndex,
+    //   longestNetworkTime,
+    //   tbt,
+    //   connectionTime,
+    //   resourceTime,
+    //   renderingOverhead,
+    //   simulatedTotalLoadTime,
+    //   realWorldFactor,
+    //   totalLoadTime,
+    //   totalLoadTimeSeconds: (totalLoadTime / 1000).toFixed(2)
+    // });
 
     // Calculate score based on realistic user perception (10-12 seconds target)
     const speedPerformance = calculateRealisticPageSpeed(totalLoadTime);
@@ -160,6 +160,11 @@ export async function fetchWebsiteDetails(url: string) {
     const mobileScreenshot = mobileImageAudit?.details?.data ?? null;
     const legibleFontSize = mobileLighthouse["font-size"]?.score ?? null;
     const responsiveCheck = mobileLighthouse["viewport"]?.score ?? null;
+    console.log(ImageSizeAudit)
+    console.log(minJSAudit)
+    console.log(pluginsAudit)
+    console.log(legibleFontSize)
+    console.log(metaDescriptionAudit)
 
     // Security audits - FIXED
     const isOnHTTPS = desktopLighthouse["is-on-https"]?.score ?? null;
@@ -174,6 +179,7 @@ export async function fetchWebsiteDetails(url: string) {
       totalPageSize: `${pageSizeKB.toFixed(2)} KB`,
       pageSizeScore,
       screenshotBase64,
+      pageSizeKB,
       pageSizeReturn,
       numberOfPageRequests,
       networkPerformance,

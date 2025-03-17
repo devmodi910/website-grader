@@ -2,7 +2,7 @@ import CircleProgress from "./CircleProgress";
 export default function SideBar({ data }: { data: number }) {
     return (
       <div
-        className="w-full md:w-1/4 bg-[#2d3e50] text-white p-6 flex flex-col 
+        className="w-full md:w-1/2 bg-[#2d3e50] text-white p-6 flex flex-col 
         md:sticky md:top-0 md:h-screen md:max-h-screen md:overflow-y-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-700"
       >
         <div className="flex justify-center mb-4">
