@@ -12,14 +12,18 @@ export default function Form() {
   const { setData } = useLighthouse();
 
   async function submit(formData: FormData) {
-    const url = formData.get("url") as string;
+    let url = formData.get("url") as string;
 
     if (!url) {
       console.error("URL is required");
       return;
     }
 
-    setLoading(true);
+    if (!/^https?:\/\//i.test(url)) {
+      url = `https://${url}`;
+    }
+
+    setLoading(true); // Set loading to true to show the loading state
 
     try {
       console.log("Fetching data directly from fetchWebsiteDetails...");
@@ -31,7 +35,7 @@ export default function Form() {
         pageSizeScore: data.pageSizeScore,
         screenshotBase64: data.screenshotBase64,
         pageSizeReturn: data.pageSizeReturn,
-        pageSizeKB:data.pageSizeKB,
+        pageSizeKB: data.pageSizeKB,
         numberOfPageRequests: data.numberOfPageRequests,
         totalLoadTime: data.totalLoadTime,
         cachingAudit: data.cachingAudit,
@@ -47,37 +51,54 @@ export default function Form() {
         legibleFontSize: data.legibleFontSize,
         responsiveCheck: data.responsiveCheck,
         httpAudit: data.httpAudit,
-        secureLibAudit:data.secureLibAudit,
-        networkPerformance:data.networkPerformance,
-        speedPerformance:data.speedPerformance,
+        secureLibAudit: data.secureLibAudit,
+        networkPerformance: data.networkPerformance,
+        speedPerformance: data.speedPerformance,
       });
 
       router.push(`/results`);
     } catch (error) {
-      console.error("Error fetching Lighthouse results:", error);
+      router.push(`/error?message=Failed to fetch website details`);
     } finally {
-      setLoading(false);
+      setLoading(false); // Set loading to false after fetching completes
     }
   }
 
   return (
-    <div className="max-w-md mx-auto w-full">
-      <form action={submit}>
+    <div className="relative max-w-md mx-auto w-full">
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          const form = e.target as HTMLFormElement;
+          submit(new FormData(form));
+        }}
+      >
         <input
           type="url"
           name="url"
+          id="urlInput"
           required
-          placeholder="Website"
+          placeholder="Website (e.g., example.com or https://example.com)"
           className="w-full p-3 mb-4 rounded bg-transparent text-center border-b-2 border-slate-500 text-white focus:border-blue-400 outline-none transition-colors focus:placeholder-transparent"
+          onBlur={(e) => {
+            let value = e.target.value.trim();
+            if (value && !/^https?:\/\//i.test(value)) {
+              e.target.value = `https://${value}`;
+            }
+          }}
         />
+
         <input
-          type="email"  
+          type="email"
           placeholder="Email"
           className="w-full p-3 mb-4 rounded bg-transparent text-center border-b-2 border-slate-500 text-white focus:border-blue-400 outline-none transition-colors focus:placeholder-transparent"
         />
 
         <p className="text-white text-xs mb-6 text-left">
-        We're committed to your privacy. HubSpot uses the information you provide to us to contact you about our relevant content, products, and services. You may unsubscribe from these communications at any time. For more information, check out our {" "}
+          We're committed to your privacy. HubSpot uses the information you
+          provide to us to contact you about our relevant content, products, and
+          services. You may unsubscribe from these communications at any time.
+          For more information, check out our{" "}
           <Link href="/webgrader" className="text-blue-400 hover:underline">
             Privacy Policy.
           </Link>

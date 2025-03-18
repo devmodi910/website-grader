@@ -25,7 +25,7 @@ export default function Component() {
         </header>
 
         {/* Main Content */}
-        <main className="relative flex flex-col items-center justify-center pt-16 pb-16 px-4">
+        <main className="bg-[#2D3E50] flex flex-col items-center justify-center pt-16 pb-16 px-4">
           <div className="text-center mb-12">
             <div className="flex justify-center mb-6">
               <Image
