@@ -37,7 +37,7 @@ export async function fetchWebsiteDetails(url: string) {
       fetchWithTimeout(
         `${API_URL}?url=${encodeURIComponent(
           url
-        )}&category=performance&category=seo&category=accessibility&strategy=mobile&key=${API_KEY}`
+        )}&category=performance&category=seo&category=best-practices&category=accessibility&strategy=mobile&key=${API_KEY}`
       ),
     ]);
 
@@ -152,7 +152,10 @@ export async function fetchWebsiteDetails(url: string) {
     const perm_to_index = crawlable === 1 && is_robot !== null && is_robot !== 0;
 
     // Additional audits
-    const pluginsAudit = desktopLighthouse["plugins"]?.score ?? desktopLighthouse["content-plugins"]?.score ?? null;
+    // const pluginsAudit = desktopLighthouse["plugins"]?.score ?? desktopLighthouse["content-plugins"]?.score ?? null;
+    const pluginsAudit = desktopLighthouse["critical-request-chains"]?.score ?? null;
+    // console.log(desktopLighthouse["critical-request-chains"])
+
     const linkTextAudit = desktopLighthouse["link-text"]?.score ?? null;
 
     // Mobile audits
@@ -160,11 +163,11 @@ export async function fetchWebsiteDetails(url: string) {
     const mobileScreenshot = mobileImageAudit?.details?.data ?? null;
     const legibleFontSize = mobileLighthouse["font-size"]?.score ?? null;
     const responsiveCheck = mobileLighthouse["viewport"]?.score ?? null;
-    console.log(ImageSizeAudit)
-    console.log(minJSAudit)
-    console.log(pluginsAudit)
-    console.log(legibleFontSize)
-    console.log(metaDescriptionAudit)
+    // console.log(ImageSizeAudit)
+    // console.log(minJSAudit)
+    // console.log(pluginsAudit)
+    // console.log(legibleFontSize)
+    // console.log(metaDescriptionAudit)
 
     // Security audits - FIXED
     const isOnHTTPS = desktopLighthouse["is-on-https"]?.score ?? null;
@@ -172,8 +175,10 @@ export async function fetchWebsiteDetails(url: string) {
     const httpAudit = isOnHTTPS === 1 ? 1 : 0;
     
     // Additional security checks
-    const secureLibAudit = desktopLighthouse["no-vulnerable-libraries"]?.score ?? 1;
-
+    const secureLibAudit = "js-libraries" in desktopLighthouse
+  ? desktopLighthouse["js-libraries"].score
+  : undefined;
+  console.log(secureLibAudit);
     return {
       url,
       totalPageSize: `${pageSizeKB.toFixed(2)} KB`,

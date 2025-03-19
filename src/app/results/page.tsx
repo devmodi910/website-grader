@@ -123,7 +123,7 @@ export default function ResultsPage() {
                 <h3 className="text-[#333] text-[32px] font-bold">
                   Performance
                 </h3>
-                <div className="text-[#33475b] text-[16px] font-normal text-center leading-6 relative m-auto w-4/5 max-w-[690px] space-x-0">
+                <div className="text-[#33475b] text-[16px] font-normal text-center leading-6 relative m-auto w-4/5 max-w-[690px]">
                   Optimizing your website's performance is crucial to increasing
                   traffic, improving conversion rates, generating more leads,
                   and increasing revenue.
@@ -319,7 +319,7 @@ export default function ResultsPage() {
                     </div>
                     <ImageStatus data={JSQualtiy} />
                     <div>
-                      {ImageQualtiy ? (
+                      {JSQualtiy ? (
                         <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px]">
                           Have you been working out?
                         </div>
@@ -467,7 +467,7 @@ export default function ResultsPage() {
                       !isNaN(data.pluginsAudit) &&
                       data.pluginsAudit >= 0.5 ? (
                         <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px]">
-                          Need for improvement
+                          *Clap, clap, clap* Good job!
                         </div>
                       ) : (
                         <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px]">
@@ -477,24 +477,18 @@ export default function ResultsPage() {
 
                       <div className="text-[#516f90] text-[14px] leading-[20px] my-[10px]">
                         Search engines can't always understand content that
-                        relies on browser plugins, such as Flash and hulk web  hello.
+                        relies on browser plugins, such as Flash.
                       </div>
                     </div>
                   </div>
 
                   {/* Box 3 (Now Equal in Size) */}
                   <div className="flex-1 bg-white border-r border-[#dbdbdb] last:border-r-0 p-4 m-[30px] pt-9 px-[30px] pb-[30px] shadow-md">
-                    <div className="text-[10px] font-medium relative leading-[14px] text-white">
-                      <div className="bg-[#00bda5] absolute top-[-26px] right-[-35px] h-[20px] py-1 pr-2 pl-3 ml-auto uppercase rounded-[20px_3px_3px_20px]">
-                        Pass
-                      </div>
-                    </div>
+                  <Status data={data.metaDescriptionAudit} />
                     <div className="text-[14px] leading-[19px] text-[#4a4a4a] mb-5 uppercase break-words">
                       Descriptive Link Text
                     </div>
-                    <div className="relative h-15 w-13 mx-auto my-5">
-                      <Image src={"/images/pass.webp"} fill alt="xyz"></Image>
-                    </div>
+                    <ImageStatus data={data.metaDescriptionAudit} />
                     <div>
                       {data.metaDescriptionAudit ? (
                         <div className="leading-[21px] font-bold text-[14px] my-auto mx-[10px]">
