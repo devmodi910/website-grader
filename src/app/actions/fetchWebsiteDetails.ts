@@ -233,7 +233,6 @@ function calculateNetworkPerformance(numberOfPageRequests: number) {
   return Math.max(0, Math.round(100 - (numberOfPageRequests / 200) * 100));
 }
 
-// Adjusted to align with real-world expectation of 10-12 seconds
 function calculateRealisticPageSpeed(timeInMS: number) {
   const maxAcceptableTime = 20000;
   

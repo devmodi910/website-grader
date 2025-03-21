@@ -25,6 +25,41 @@ export default function ResultsPage() {
   const CSSQualtiy: boolean = data?.minCSS !== undefined && data.minCSS >= 0.8;
   const TextQuality: boolean =
     data?.linkTextAudit !== undefined && data.linkTextAudit >= 0.5;
+    const SecureJS: boolean =
+    data?.secureLibAudit === null || data?.secureLibAudit === 1;
+
+    let mainPerformanceScore: number = [
+      (data?.pageSizeScore ?? 0) * 6 / 100,
+      (data?.networkPerformance ?? 0) * 7 / 100,
+      (data?.speedPerformance ?? 0) * 7 / 100,
+      cacheQualtiy ? 2 : 0,
+      redirectQualtiy ? 2 : 0,
+      ImageQualtiy ? 2 : 0,
+      JSQualtiy ? 2 : 0,
+      CSSQualtiy ? 2 : 0
+    ].reduce((sum, value) => sum + value, 0);
+  
+    let mainSEOScore:number = [
+      data?.perm_to_index ? 7 : 0,
+      data?.metaDescriptionAudit === 1 ? 7 : 0,
+      TextQuality ? 8 : 0,
+      data?.pluginsAudit ===1 ? 8 : 0
+    ].reduce((sum,value) => sum + value,0);
+  
+    let mainMobileScore:number = [
+      data?.legibleFontSize === 1 ? 10 : 0,
+      data?.metaDescriptionAudit === 1 ? 10 : 0,
+      data?.responsiveCheck === 1 ? 10 : 0
+    ].reduce((sum,value) => sum + value,0);
+  
+    let mainSecurityScore:number = [
+      data?.httpAudit === 1 ? 5 : 0,
+      SecureJS ? 5 : 0
+    ].reduce((sum,value) => sum + value,0)
+  
+    let mainScore:number = (mainSecurityScore + mainMobileScore + mainSEOScore + mainPerformanceScore);
+
+    let result:string = mainScore > 75 ? "great" : (mainScore > 50 ? "good" : "bad");
 
   useEffect(() => {
     if (!data) {
@@ -40,7 +75,7 @@ export default function ResultsPage() {
       className="relative flex flex-col md:flex-row h-screen overflow-y-auto font-sans"
     >
       {/* Sidebar */}
-      <SideBar data={data.pageSizeScore} />
+      <SideBar data={Math.floor(mainScore)} />
 
       {/* Main Content */}
       <div className="bg-[#f5f8fa] h-full -z-20">
@@ -66,7 +101,7 @@ export default function ResultsPage() {
             </div>
             <div className="max-w-2xl mx-auto text-white mb-4 flex flex-col mt-20">
               <h1 className="text-5xl text-center font-bold mb-3">
-                This site is great
+                This site is {result}
               </h1>
               <p className="text-[14px] leading-6">
                 You're amazing! Let's all bask in the glow of your amazingness.
@@ -102,7 +137,7 @@ export default function ResultsPage() {
                 <div className="flex justify-center mt-15 mb-3 text-center">
                   <div className="flex justify-center items-center w-38 object-contain ">
                     <Image
-                      src={"/images/file1.webp"}
+                      src={"/images/performance.png"}
                       width={200}
                       height={200}
                       alt="xyz"
@@ -111,7 +146,7 @@ export default function ResultsPage() {
                 </div>
                 <div className="mt-6">
                   <div className="text-5xl font-bold">
-                    <span className="text-[#00bda5]">30</span>
+                    <span className="text-[#00bda5]">{Math.floor(mainPerformanceScore)}</span>
                     <span className="text-[#33475b] text-3xl">/30</span>
                   </div>
                   <div className="mb-[10px] inline-block relative w-60">
@@ -367,7 +402,7 @@ export default function ResultsPage() {
                   <div className="flex justify-center items-center w-38 object-contain">
                     <Image
                       className="bg-[#f5f8fa]"
-                      src={"/images/global.svg"}
+                      src={"/images/SEO.webp"}
                       width={200}
                       height={200}
                       alt="xyz"
@@ -376,7 +411,7 @@ export default function ResultsPage() {
                 </div>
                 <div className="mt-6">
                   <div className="text-5xl font-bold">
-                    <span className="text-[#00bda5]">30</span>
+                    <span className="text-[#00bda5]">{mainSEOScore}</span>
                     <span className="text-[#33475b] text-3xl">/30</span>
                   </div>
                   <div className="mb-[10px] inline-block relative w-60">
@@ -515,7 +550,7 @@ export default function ResultsPage() {
                 <div className="flex justify-center mt-15 mb-3 text-center">
                   <div className="flex justify-center items-center w-38 object-contain ">
                     <Image
-                      src={"/images/file1.webp"}
+                      src={"/images/mobile.png"}
                       width={200}
                       height={200}
                       alt="xyz"
@@ -524,7 +559,7 @@ export default function ResultsPage() {
                 </div>
                 <div className="mt-6">
                   <div className="text-5xl font-bold">
-                    <span className="text-[#00bda5]">30</span>
+                    <span className="text-[#00bda5]">{mainMobileScore}</span>
                     <span className="text-[#33475b] text-3xl">/30</span>
                   </div>
                   <div className="mb-[10px] inline-block relative w-60">
@@ -670,7 +705,7 @@ export default function ResultsPage() {
                 <div className="flex justify-center mt-15 mb-3 text-center">
                   <div className="flex justify-center items-center w-38 object-contain ">
                     <Image
-                      src={"/images/file1.webp"}
+                      src={"/images/security.webp"}
                       width={200}
                       height={200}
                       alt="xyz"
@@ -679,7 +714,7 @@ export default function ResultsPage() {
                 </div>
                 <div className="mt-6">
                   <div className="text-5xl font-bold">
-                    <span className="text-[#00bda5]">10</span>
+                    <span className="text-[#00bda5]">{mainSecurityScore}</span>
                     <span className="text-[#33475b] text-3xl">/10</span>
                   </div>
                   <div className="mb-[10px] inline-block relative w-60">
